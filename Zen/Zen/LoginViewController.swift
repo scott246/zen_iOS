@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         //use firebase authorization
         Auth.auth().createUser(withEmail: email!, password: password!, completion: { (user: User?, error) in
             if error == nil {
-                self.regSuccessLabel.text = "Registration success!"
+                self.regSuccessLabel.text = "Registered as \(email ?? "a user")."
             }else{
                 self.regSuccessLabel.text = error?.localizedDescription
             }
@@ -50,13 +50,8 @@ class LoginViewController: UIViewController {
         })
     }
     @IBAction func fpButton(_ sender: AnyObject) {
-        let email = emailTextField.text
-        
-        Auth.auth().sendPasswordReset(withEmail: email!) { (error) in
-            if error != nil {
-                self.regSuccessLabel.text = error?.localizedDescription
-            }
-        }
+    }
+    @IBAction func aboutButton(_ sender: AnyObject) {
     }
 
     

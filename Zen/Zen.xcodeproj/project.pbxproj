@@ -19,6 +19,8 @@
 		43BC89531EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89541EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89551EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
+		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
+		43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */; };
 		43FBC7431EECDE1100283477 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBC7421EECDE1100283477 /* MenuViewController.swift */; };
 		A78C9A671F8B68AB9F873791 /* Pods_Zen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25552B2254423D5563ED9089 /* Pods_Zen.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		43BC89441EECB3EB003FC1CC /* ZenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenUITests.swift; sourceTree = "<group>"; };
 		43BC89461EECB3EB003FC1CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		43FBC7421EECDE1100283477 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		480F9EF8FCEC38FA3B9A0125 /* Pods_ZenUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5339B1C18EDAEF2033417B19 /* Pods-Zen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zen/Pods-Zen.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,8 +148,10 @@
 			isa = PBXGroup;
 			children = (
 				43BC89241EECB3EB003FC1CC /* AppDelegate.swift */,
+				43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */,
 				43BC89261EECB3EB003FC1CC /* LoginViewController.swift */,
 				43FBC7421EECDE1100283477 /* MenuViewController.swift */,
+				43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */,
 				43BC89281EECB3EB003FC1CC /* Main.storyboard */,
 				43BC892B1EECB3EB003FC1CC /* Assets.xcassets */,
 				43BC892D1EECB3EB003FC1CC /* LaunchScreen.storyboard */,
@@ -463,6 +469,8 @@
 				43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */,
 				43FBC7431EECDE1100283477 /* MenuViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
+				43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */,
+				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
