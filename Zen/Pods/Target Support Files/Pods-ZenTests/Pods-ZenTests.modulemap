@@ -1,0 +1,6 @@
+framework module Pods_ZenTests {
+  umbrella header "Pods-ZenTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
