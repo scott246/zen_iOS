@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 import Firebase
 
-class MenuViewController: UIViewController {
-    
-    @IBOutlet weak var emailLabel: UILabel!
+class MenuViewController: UITableViewController {
+
     @IBAction func logoutButton(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -25,7 +24,6 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        emailLabel.text = Auth.auth().currentUser?.email
     }
     
     override func didReceiveMemoryWarning() {
