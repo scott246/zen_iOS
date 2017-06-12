@@ -11,12 +11,17 @@ import UIKit
 import Firebase
 
 class AboutViewController: UIViewController {
-    @IBOutlet weak var background: UIImageView!
     
+    @IBOutlet weak var backToLoginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        background.image = UIImage(named:"Image")
+        if Auth.auth().currentUser != nil{
+            backToLoginButton.isHidden = true
+        }
+        else {
+            backToLoginButton.isHidden = false
+        }
     }
     
     override func didReceiveMemoryWarning() {

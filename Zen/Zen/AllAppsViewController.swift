@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class EmbeddedMenuViewController: UITableViewController{
+class AllAppsViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()

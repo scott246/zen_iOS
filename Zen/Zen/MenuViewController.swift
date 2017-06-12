@@ -10,45 +10,27 @@ import Foundation
 import UIKit
 import Firebase
 
-class MenuViewController: UIViewController{
-    
-    /*
-     TODO apps
-     budget
-     calculator
-     calendar
-     clock
-     contacts
-     diary
-     email
-     list
-     medical tracker
-     messages
-     news
-     notes
-     reminders
-     system info
-     tasks
-     weather
-    */
-    var apps = [
-        ("Note"), ("List"), ("Task")
-    ]
-    
+class MenuViewController: UIViewController {
+
     @IBOutlet weak var emailDisplay: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Zen"
         emailDisplay.text = "\(getEmail())"
-        imageView.image = UIImage(named:"Image")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+
+    @IBAction func budgetButton(_ sender: Any) {
+    }
+    @IBAction func recordsButton(_ sender: Any) {
+    }
+    @IBAction func calendarButton(_ sender: Any) {
     }
 
     @IBAction func logoutButton(_ sender: Any) {
@@ -66,7 +48,6 @@ class MenuViewController: UIViewController{
     func getEmail() -> String {
         return (Auth.auth().currentUser?.email)!
     }
-    
     
     
 }

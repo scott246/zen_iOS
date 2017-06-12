@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
     //registration success/failure label
     @IBOutlet weak var regSuccessLabel: UILabel!
     
-    @IBOutlet weak var background: UIImageView!
     // MARK: login screen buttons
     //button for registration
     @IBAction func registerButton(_ sender: AnyObject) {
@@ -59,7 +58,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        background.image = UIImage(named:"Image-1")
         //FirebaseApp.configure()
         Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
