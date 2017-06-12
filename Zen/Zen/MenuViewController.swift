@@ -12,15 +12,36 @@ import Firebase
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /*
+     TODO apps
+     budget
+     calculator
+     calendar
+     clock
+     contacts
+     diary
+     email
+     list
+     medical tracker
+     messages
+     news
+     notes
+     reminders
+     system info
+     tasks
+     weather
+    */
     var apps = [
         ("Note"), ("List"), ("Task")
     ]
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Zen (\(getEmail()))"
-        
+        imageView.image = UIImage(named:"Image")
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,7 +52,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return apps.count
@@ -56,6 +78,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         } catch {
             print("sign out error")
         }
+    }
+    @IBAction func settingsButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "settings", sender: nil)
     }
     
     func getEmail() -> String {
