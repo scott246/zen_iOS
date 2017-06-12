@@ -12,6 +12,7 @@ import Firebase
 
 class PasswordResetViewController: UIViewController {
     
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
     @IBAction func sendEmailButton(_ sender: Any) {
@@ -32,6 +33,7 @@ class PasswordResetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        background.image = UIImage(named:"Image")
     }
     
     override func didReceiveMemoryWarning() {
