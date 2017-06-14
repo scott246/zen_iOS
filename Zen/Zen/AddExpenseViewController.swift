@@ -24,7 +24,7 @@ class AddExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     weak var delegate: ExpenseDataEnteredDelegate? = nil
     
-    var pickerFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Motorcycle", "Music", "Other", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
+    var pickerFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1

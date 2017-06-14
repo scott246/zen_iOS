@@ -25,41 +25,37 @@ class Transaction {
     init (snapshot: DataSnapshot) {
         ref = snapshot.ref
         var data = snapshot.value as! Dictionary<String, Any>
-        if data["date"] != nil {
-            date = data["date"]! as? String
-        }
-        else if data["type"] != nil {
-            type = data["type"]! as? String
-        }
-        else if data["amount"] != nil {
-            amount = data["amount"]! as? String
-        }
-        else if data["note"] != nil {
-            note = data["note"]! as? String
-        }
-        else if data["category"] != nil {
-            category = data["category"]! as? String
-        }
-        else {
-            recurring = data["recurring"]! as? Bool
-        }
+        date = data["date"]! as? String
+        type = data["type"]! as? String
+        amount = data["amount"]! as? String
+        note = data["note"]! as? String
+        category = data["category"]! as? String
+        recurring = data["recurring"]! as? Bool
     }
 }
 
-class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate {
+class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, IncomeDataEnteredDelegate {
     
     var records = 0 {
         didSet{
-            if records == 5 {
+            if records == 6 {
                 records = 0
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("date").setValue(date)
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("type").setValue("expense")
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("amount").setValue(amount)
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("note").setValue(note)
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("category").setValue(category)
-                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("recurring").setValue(recurring)
+                let transDict = [
+                    "date": date ?? "",
+                    "amount": amount ?? "",
+                    "note": note ?? "",
+                    "category": category ?? "",
+                    "recurring": recurring ?? false,
+                    "type": type ?? ""
+                ] as [String : Any]
+                createNewTransaction(transaction: transDict)
             }
         }
+    }
+    
+    func createNewTransaction(transaction: Dictionary<String, Any>) {
+        let newTransaction = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+        newTransaction.setValue(transaction)
     }
     
     var date: String?{
@@ -83,6 +79,11 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate {
         }
     }
     var recurring: Bool? {
+        didSet{
+            records += 1
+        }
+    }
+    var type: String? {
         didSet{
             records += 1
         }
@@ -143,25 +144,8 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate {
     }
     
     func didTapAddIncome() {
-        let prompt = UIAlertController(title: "Add Income", message: "Please enter amount.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            let userInput = prompt.textFields![0].text
-            if (userInput!.isEmpty) {
-                return
-            }
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("amount").setValue(userInput)
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("type").setValue("income")
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM-dd-yyyy"
-            let today = formatter.string(from: date)
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("date").setValue(today)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        prompt.addTextField(configurationHandler: nil)
-        prompt.addAction(okAction)
-        prompt.addAction(cancelAction)
-        present(prompt, animated: true, completion: nil);
+        type = "income"
+        performSegue(withIdentifier: "addIncomeFromRecords", sender: nil)
     }
     
     func userDidEnterNoteInformation(info: String) {
@@ -186,50 +170,26 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate {
             expenseVC.delegate = self
         }
         if segue.identifier == "addIncomeFromRecords" {
-            //let incomeVC = segue.destination as! AddIncomeViewController
-            //incomeVC.delegate = self
+            let incomeVC = segue.destination as! AddIncomeViewController
+            incomeVC.delegate = self
         }
     }
     
     func didTapAddExpense() {
+        type = "expense"
         performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
     }
     
     func startObservingDatabase() {
         databaseHandle = ref.child("users/\(self.user.uid)/transactions").observe(.value, with: { (snapshot) in
             var newTransactions = [Transaction]()
-            var counter = 0
             var transaction: Transaction?
             for itemSnapShot in snapshot.children {
-                switch counter {
-                case 0:
-                    transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
-                    counter += 1
-                    break
-                case 1:
-                    transaction?.type = Transaction(snapshot: itemSnapShot as! DataSnapshot).type
-                    counter += 1
-                    break
-                case 2:
-                    transaction?.amount = Transaction(snapshot: itemSnapShot as! DataSnapshot).amount
-                    counter += 1
-                    break
-                case 3:
-                    transaction?.note = Transaction(snapshot: itemSnapShot as! DataSnapshot).note
-                    counter += 1
-                    break
-                case 4:
-                    transaction?.category = Transaction(snapshot: itemSnapShot as! DataSnapshot).category
-                    counter += 1
-                    break
-                case 5:
-                    transaction?.recurring = Transaction(snapshot: itemSnapShot as! DataSnapshot).recurring
-                    newTransactions.append(transaction!)
-                    counter = 0
-                default:
-                    break
-                }
-                
+                print(snapshot)
+                print(snapshot.children)
+                print(itemSnapShot)
+                transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
+                newTransactions.append(transaction!)
             }
             self.transactions = newTransactions
             self.tableView.reloadData()
