@@ -9,12 +9,22 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseDatabase
+
+var currency = "$"
 
 class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate, CycleDataEnteredDelegate {
+    
+    var user: User!
+    var ref: DatabaseReference!
+    private var databaseHandle: DatabaseHandle!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Settings"
+        user = Auth.auth().currentUser
+        ref = Database.database().reference()
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,6 +57,8 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
             alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { action in
                 //delete all data
+                self.ref.child("users/\(self.user.uid)/transactions").removeValue()
+                self.ref.child("users/\(self.user.uid)/currency").removeValue()
                 print("data reset")
             }))
             self.present(alert, animated: true, completion: nil)
@@ -69,6 +81,8 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
     
     func userDidEnterCurrencyInformation(info: String) {
         currencyLabel.text = info
+        currency = info
+        self.ref.child("users").child(self.user.uid).child("currency").setValue(currencyLabel.text)
     }
     func userDidEnterCycleInformation(info: String) {
         cycleLabel.text = info

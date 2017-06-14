@@ -17,29 +17,76 @@ class Transaction {
     var date: String?
     var type: String?
     var amount: String?
-    //var note: String?
+    var note: String?
+    var category: String?
+    var recurring: Bool?
 
     
     init (snapshot: DataSnapshot) {
         ref = snapshot.ref
-        let data = snapshot.value as! Dictionary<String, String>
+        var data = snapshot.value as! Dictionary<String, Any>
         if data["date"] != nil {
-           date = data["date"]! as String
+            date = data["date"]! as? String
         }
         else if data["type"] != nil {
-            type = data["type"]! as String
+            type = data["type"]! as? String
         }
         else if data["amount"] != nil {
-            amount = data["amount"]! as String
+            amount = data["amount"]! as? String
         }
-        //else if data["note"] != nil {
-        //    note = data["note"]! as String
-        //}
+        else if data["note"] != nil {
+            note = data["note"]! as? String
+        }
+        else if data["category"] != nil {
+            category = data["category"]! as? String
+        }
+        else {
+            recurring = data["recurring"]! as? Bool
+        }
     }
-    
 }
 
-class RecordsViewController: UITableViewController {
+class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate {
+    
+    var records = 0 {
+        didSet{
+            if records == 5 {
+                records = 0
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("date").setValue(date)
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("type").setValue("expense")
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("amount").setValue(amount)
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("note").setValue(note)
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("category").setValue(category)
+                self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("recurring").setValue(recurring)
+            }
+        }
+    }
+    
+    var date: String?{
+        didSet{
+            records += 1
+        }
+    }
+    var amount: String? {
+        didSet{
+            records += 1
+        }
+    }
+    var note: String? {
+        didSet{
+            records += 1
+        }
+    }
+    var category: String? {
+        didSet{
+            records += 1
+        }
+    }
+    var recurring: Bool? {
+        didSet{
+            records += 1
+        }
+    }
     
     var user: User!
     var transactions = [Transaction]()
@@ -69,15 +116,22 @@ class RecordsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
         let transaction = transactions[indexPath.row]
-        cell.textLabel?.text = transaction.amount
+        var sign: String = ""
         if transaction.type == "expense"{
+            sign = "-"
             cell.backgroundColor = UIColor.red
             cell.textLabel?.textColor = UIColor.white
+            cell.detailTextLabel?.textColor = UIColor.white
         }
         if transaction.type == "income"{
+            sign = "+"
             cell.backgroundColor = UIColor.blue
             cell.textLabel?.textColor = UIColor.white
+            cell.detailTextLabel?.textColor = UIColor.white
         }
+        cell.detailTextLabel?.text = transaction.date! + " (" + sign + currency + transaction.amount! + ")"
+        cell.textLabel?.text = transaction.category! + " (" + transaction.note! + ")"
+        
         return cell
     }
     
@@ -110,29 +164,35 @@ class RecordsViewController: UITableViewController {
         present(prompt, animated: true, completion: nil);
     }
     
-    func didTapAddExpense() {
-        
-        let prompt = UIAlertController(title: "Add Expense", message: "Please enter amount.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            let userInput = prompt.textFields![0].text
-            //let noteInput = prompt.textFields![1].text
-            if (userInput!.isEmpty) {
-                return
-            }
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("amount").setValue(userInput)
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("type").setValue("expense")
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM-dd-yyyy"
-            let today = formatter.string(from: date)
-            self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("date").setValue(today)
-            //self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId().child("note").setValue(noteInput)
+    func userDidEnterNoteInformation(info: String) {
+        note = info
+    }
+    func userDidEnterDateInformation(info: String) {
+        date = info
+    }
+    func userDidEnterAmountInformation(info: String) {
+        amount = info
+    }
+    func userDidEnterCategoryInformation(info: String) {
+        category = info
+    }
+    func userDidEnterRecurringInformation(info: Bool) {
+        recurring = info
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addExpenseFromRecords" {
+            let expenseVC = segue.destination as! AddExpenseViewController
+            expenseVC.delegate = self
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        prompt.addTextField(configurationHandler: nil)
-        prompt.addAction(okAction)
-        prompt.addAction(cancelAction)
-        present(prompt, animated: true, completion: nil);
+        if segue.identifier == "addIncomeFromRecords" {
+            //let incomeVC = segue.destination as! AddIncomeViewController
+            //incomeVC.delegate = self
+        }
+    }
+    
+    func didTapAddExpense() {
+        performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
     }
     
     func startObservingDatabase() {
@@ -151,13 +211,21 @@ class RecordsViewController: UITableViewController {
                     counter += 1
                     break
                 case 2:
-                    transaction?.date = Transaction(snapshot: itemSnapShot as! DataSnapshot).date
+                    transaction?.amount = Transaction(snapshot: itemSnapShot as! DataSnapshot).amount
                     counter += 1
                     break
-                //case 3:
-                //    transaction?.note = Transaction(snapshot: itemSnapShot as! DataSnapshot).note
-                //    newTransactions.append(transaction!)
-                //    counter = 0
+                case 3:
+                    transaction?.note = Transaction(snapshot: itemSnapShot as! DataSnapshot).note
+                    counter += 1
+                    break
+                case 4:
+                    transaction?.category = Transaction(snapshot: itemSnapShot as! DataSnapshot).category
+                    counter += 1
+                    break
+                case 5:
+                    transaction?.recurring = Transaction(snapshot: itemSnapShot as! DataSnapshot).recurring
+                    newTransactions.append(transaction!)
+                    counter = 0
                 default:
                     break
                 }
@@ -167,9 +235,5 @@ class RecordsViewController: UITableViewController {
             self.tableView.reloadData()
             
         })
-    }
-    
-    deinit {
-        ref.child("users/\(self.user.uid)/transactions").removeObserver(withHandle: databaseHandle)
     }
 }

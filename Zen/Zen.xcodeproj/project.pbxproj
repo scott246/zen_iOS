@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0CC09C98ED60851B88D90451 /* Pods_ZenUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480F9EF8FCEC38FA3B9A0125 /* Pods_ZenUITests.framework */; };
 		1927F574CCE5FF671720957E /* Pods_ZenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100E88B8FF036A46423ACE86 /* Pods_ZenTests.framework */; };
+		4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */; };
+		430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */; };
 		4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */; };
 		4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E3111EF03206003DC1D6 /* RecordsViewController.swift */; };
 		438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */; };
@@ -25,7 +27,7 @@
 		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
 		43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */; };
 		43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */; };
-		43FBC7431EECDE1100283477 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBC7421EECDE1100283477 /* MenuViewController.swift */; };
+		43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBC7421EECDE1100283477 /* BudgetViewController.swift */; };
 		A78C9A671F8B68AB9F873791 /* Pods_Zen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25552B2254423D5563ED9089 /* Pods_Zen.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		100E88B8FF036A46423ACE86 /* Pods_ZenTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25552B2254423D5563ED9089 /* Pods_Zen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E762A5A28B31B024BB874C /* Pods-ZenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZenTests/Pods-ZenTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
+		4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleDurationViewController.swift; sourceTree = "<group>"; };
 		4308E3111EF03206003DC1D6 /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		43FBC7421EECDE1100283477 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		43FBC7421EECDE1100283477 /* BudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		480F9EF8FCEC38FA3B9A0125 /* Pods_ZenUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZenUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5339B1C18EDAEF2033417B19 /* Pods-Zen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zen/Pods-Zen.debug.xcconfig"; sourceTree = "<group>"; };
 		625E57C1D50403DA7D1E44B4 /* Pods-Zen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zen/Pods-Zen.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +134,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4307260C1EF09FBF005C78EE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */,
+				43BC89261EECB3EB003FC1CC /* LoginViewController.swift */,
+				43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		431842F91EF0E17C00D51052 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */,
+				4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */,
+				4308E3111EF03206003DC1D6 /* RecordsViewController.swift */,
+			);
+			name = Records;
+			sourceTree = "<group>";
+		};
 		438D9B6F1EEF87C500831E32 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,13 +189,11 @@
 		43BC89231EECB3EB003FC1CC /* Zen */ = {
 			isa = PBXGroup;
 			children = (
-				438D9B6F1EEF87C500831E32 /* Settings */,
 				43BC89241EECB3EB003FC1CC /* AppDelegate.swift */,
-				43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */,
-				43BC89261EECB3EB003FC1CC /* LoginViewController.swift */,
-				43FBC7421EECDE1100283477 /* MenuViewController.swift */,
-				43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */,
-				4308E3111EF03206003DC1D6 /* RecordsViewController.swift */,
+				4307260C1EF09FBF005C78EE /* Login */,
+				431842F91EF0E17C00D51052 /* Records */,
+				438D9B6F1EEF87C500831E32 /* Settings */,
+				43FBC7421EECDE1100283477 /* BudgetViewController.swift */,
 				43BC892D1EECB3EB003FC1CC /* LaunchScreen.storyboard */,
 				43BC89281EECB3EB003FC1CC /* Main.storyboard */,
 				43BC892B1EECB3EB003FC1CC /* Assets.xcassets */,
@@ -487,12 +509,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */,
-				43FBC7431EECDE1100283477 /* MenuViewController.swift in Sources */,
+				43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */,
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
 				4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */,
 				438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */,
 				43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */,
+				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,
+				430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */,
 				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 				43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */,
 			);
