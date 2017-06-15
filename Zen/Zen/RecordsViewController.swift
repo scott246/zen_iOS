@@ -38,6 +38,9 @@ class Transaction {
 
 class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, IncomeDataEnteredDelegate, EditDataEnteredDelegate {
     
+    var dateSections: [String]? = []
+    var dateData: [[String]]? = []
+    
     var records = 0 {
         didSet{
             if records == 6 {
@@ -162,19 +165,51 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         startObservingDatabase()
     }
     
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return (dateSections?.count)!
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.minimumIntegerDigits = 1
+        var total = 0.0
+        for amountString in (dateData?[section])! {
+            total += Double(amountString) ?? 0.0
+        }
+        return (dateSections?[section])!+": "+currency+formatter.string(from: NSNumber(value: total))!
+    }
+
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        return dateData![section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
-        let transaction = transactions[indexPath.row]
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        self.transactions.sort(by: {
+            df.date(from: $0.date!)! > df.date(from: $1.date!)!
+        })
+        
+        //indexPath.section = dateSections?.index(of: (dateSections?.first(where: {$0 == (transactions[indexPath.row]?.date)!}))!)
+        
+        var row = 0
+        let ipsec = indexPath.section
+        var currsec = 0
+        let iprow = indexPath.row
+        
+        while currsec < ipsec {
+            row += tableView.numberOfRows(inSection: currsec)
+            currsec += 1
+        }
+        row += iprow
+        
+        let transaction = self.transactions[row]
         var sign: String = ""
         if transaction.type == "expense"{
             sign = "-"
@@ -193,38 +228,54 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        var row = 0
+        let ipsec = indexPath.section
+        var currsec = 0
+        let iprow = indexPath.row
+        
+        while currsec < ipsec {
+            row += tableView.numberOfRows(inSection: currsec)
+            currsec += 1
+        }
+        row += iprow
         if editingStyle == .delete {
-            let transaction = transactions[indexPath.row]
+            let transaction = transactions[row]
             transaction.ref?.removeValue()
         }
     }
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var row = 0
+        let ipsec = indexPath.section
+        var currsec = 0
+        let iprow = indexPath.row
+        
+        while currsec < ipsec {
+            row += tableView.numberOfRows(inSection: currsec)
+            currsec += 1
+        }
+        row += iprow
         //let ip = tableView.indexPathForSelectedRow
         //let currentCell = tableView.cellForRow(at: ip!)!
-        let cellAmount = transactions[indexPath.row].amount
-        let cellDate = transactions[indexPath.row].date
-        let cellCategory = transactions[indexPath.row].category
+        let cellAmount = transactions[row].amount
+        let cellDate = transactions[row].date
+        let cellCategory = transactions[row].category
         var cellRecurring: String?
-        if transactions[indexPath.row].recurring! {
+        if transactions[row].recurring! {
             cellRecurring = "true"
         }
         else {
             cellRecurring = "false"
         }
-        let cellNote = transactions[indexPath.row].note
-        let cellType = transactions[indexPath.row].type
+        let cellNote = transactions[row].note
+        let cellType = transactions[row].type
 
         let theSender = [cellAmount!, cellCategory!, cellDate!, cellNote!, cellRecurring!, cellType!]
         performSegue(withIdentifier: "toDetail", sender: theSender)
-        changeKey = transactions[indexPath.row].key
-    }
-    
-    func changeInfo() {
-        
+        changeKey = transactions[row].key
     }
     
     func didTapAddIncome() {
@@ -303,16 +354,68 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     }
     
     func startObservingDatabase() {
-        databaseHandle = ref.child("users/\(self.user.uid)/transactions").observe(.value, with: { (snapshot) in
+        databaseHandle = ref.child("users/\(self.user.uid)/transactions").queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
             var newTransactions = [Transaction]()
+            var newDateSections = [String]()
+            var newDateData = [[String]]()
             var transaction: Transaction?
             for itemSnapShot in snapshot.children {
                 transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
+                
+                if !newDateSections.contains(where: {$0 == (transaction?.date)!}) {
+                    newDateSections.append((transaction?.date)!)
+                    if (transaction?.type)! == "expense" {
+                        newDateData.append(["-" + (transaction?.amount)!])
+                    }
+                    else if (transaction?.type)! == "income" {
+                        newDateData.append([(transaction?.amount)!])
+                    }
+                }
+                else {
+                    if (transaction?.type)! == "expense" {
+                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append("-" + (transaction?.amount)!)
+                    }
+                    else if (transaction?.type)! == "income" {
+                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append((transaction?.amount)!)
+                    }
+                }
+                
                 newTransactions.append(transaction!)
             }
+            print(newDateSections)
+            print(newDateData)
+            
+            //sort data
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd"
+            
+            
+            let count = newDateSections.count
+            
+            // Create the array of tuples and sort according to the
+            // first tuple value (i.e. the first array)
+            let sortedTuples =
+                (0..<count).map { (newDateSections[$0], newDateData[$0]) }.sorted { df.date(from: $0.0)! > df.date(from: $1.0)!}
+            
+            // Map over the sorted tuples array to separate out the
+            // original (now sorted) arrays.
+            newDateSections = sortedTuples.map { $0.0 }
+            newDateData = sortedTuples.map { $0.1 }
+            
+            
+            print(newDateSections)
+            print(newDateData)
+            self.dateSections = newDateSections
+            self.dateData = newDateData
             self.transactions = newTransactions
-            self.tableView.reloadData()
+            DispatchQueue.main.async{
+                self.tableView.reloadData()
+            }
             
         })
+    }
+    
+    deinit {
+        ref.child("users/\(self.user.uid)/transactions").removeObserver(withHandle: databaseHandle)
     }
 }

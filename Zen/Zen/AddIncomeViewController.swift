@@ -56,7 +56,7 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func datePickerChanged(_ sender: Any) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         date = formatter.string(from: datePicker.date)
     }
     @IBOutlet weak var categoryPicker: UIPickerView!
@@ -118,7 +118,7 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         let day = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         let today = formatter.string(from: day)
         date = today
         

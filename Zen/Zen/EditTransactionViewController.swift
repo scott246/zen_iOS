@@ -34,7 +34,7 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
     
     var expenseFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Decor", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Technology", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
     var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
-    var pickerFields: [String]? = ["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"]
+    var pickerFields: [String]? = []
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
@@ -77,7 +77,7 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func datePickerChanged(_ sender: Any) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         date = formatter.string(from: datePicker.date)
     }
     @IBOutlet weak var categoryPicker: UIPickerView!
@@ -135,7 +135,7 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         noteField.text! = note
         amountField.text! = amount
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateObj = dateFormatter.date(from: date)
         datePicker.date = dateObj!
         if type == "expense" {
@@ -148,7 +148,7 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         
         //let day = Date()
         //let formatter = DateFormatter()
-        //formatter.dateFormat = "MM-dd-yyyy"
+        //formatter.dateFormat = "yyyy-MM-dd"
         //let today = formatter.string(from: day)
         //date = today
         
@@ -159,10 +159,10 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
+        formatter.minimumIntegerDigits = 1
         var amt = 0.0
         amt = (amountField.text! as NSString).doubleValue
         amount = formatter.string(from: NSNumber(value: amt))!
-        //amount = String(describing: (amountField.text! as NSString).doubleValue.)
         if (amount != "") {
             delegate?.userDidChangeDateInformation(info: date)
             note = noteField.text!
