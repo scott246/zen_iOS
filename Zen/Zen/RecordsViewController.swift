@@ -20,6 +20,7 @@ class Transaction {
     var note: String?
     var category: String?
     var recurring: Bool?
+    var key: String?
 
     
     init (snapshot: DataSnapshot) {
@@ -31,31 +32,46 @@ class Transaction {
         note = data["note"]! as? String
         category = data["category"]! as? String
         recurring = data["recurring"]! as? Bool
+        key = data["key"]! as? String
     }
 }
 
-class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, IncomeDataEnteredDelegate {
+class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, IncomeDataEnteredDelegate, EditDataEnteredDelegate {
     
     var records = 0 {
         didSet{
             if records == 6 {
                 records = 0
+                let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                key = dbref.key
                 let transDict = [
                     "date": date ?? "",
                     "amount": amount ?? "",
                     "note": note ?? "",
                     "category": category ?? "",
                     "recurring": recurring ?? false,
-                    "type": type ?? ""
+                    "type": type ?? "",
+                    "key": key ?? ""
                 ] as [String : Any]
-                createNewTransaction(transaction: transDict)
+                createNewTransaction(transaction: transDict, transactionID: dbref)
             }
         }
     }
     
-    func createNewTransaction(transaction: Dictionary<String, Any>) {
-        let newTransaction = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
-        newTransaction.setValue(transaction)
+    func createNewTransaction(transaction: Dictionary<String, Any>, transactionID: DatabaseReference) {
+        transactionID.setValue(transaction)
+    }
+    
+    func replaceTransaction(id: String) {
+        let post = ["date": changeDate ?? "",
+                    "amount": changeAmount ?? "",
+                    "note": changeNote ?? "",
+                    "category": changeCategory ?? "",
+                    "recurring": changeRecurring ?? false,
+                    "type": changeType ?? "",
+                    "key": id] as [String : Any]
+        let childUpdates = ["/users/\(self.user.uid)/transactions/\(id)/": post]
+        ref.updateChildValues(childUpdates)
     }
     
     var date: String?{
@@ -88,6 +104,48 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             records += 1
         }
     }
+    var key: String? = ""
+    
+    var changeRecords = 0 {
+        didSet{
+            if changeRecords == 6 {
+                changeRecords = 0
+                replaceTransaction(id: changeKey!)
+            }
+        }
+    }
+    var changeDate: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeAmount: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeNote: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeCategory: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeRecurring: Bool? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeType: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
+    var changeKey: String? = ""
+    
     
     var user: User!
     var transactions = [Transaction]()
@@ -142,9 +200,34 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             transaction.ref?.removeValue()
         }
     }
+
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let ip = tableView.indexPathForSelectedRow
+        //let currentCell = tableView.cellForRow(at: ip!)!
+        let cellAmount = transactions[indexPath.row].amount
+        let cellDate = transactions[indexPath.row].date
+        let cellCategory = transactions[indexPath.row].category
+        var cellRecurring: String?
+        if transactions[indexPath.row].recurring! {
+            cellRecurring = "true"
+        }
+        else {
+            cellRecurring = "false"
+        }
+        let cellNote = transactions[indexPath.row].note
+        let cellType = transactions[indexPath.row].type
+
+        let theSender = [cellAmount!, cellCategory!, cellDate!, cellNote!, cellRecurring!, cellType!]
+        performSegue(withIdentifier: "toDetail", sender: theSender)
+        changeKey = transactions[indexPath.row].key
+    }
+    
+    func changeInfo() {
+        
+    }
     
     func didTapAddIncome() {
-        type = "income"
         performSegue(withIdentifier: "addIncomeFromRecords", sender: nil)
     }
     
@@ -163,6 +246,28 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     func userDidEnterRecurringInformation(info: Bool) {
         recurring = info
     }
+    func userDidEnterTypeInformation(info: String) {
+        type = info
+    }
+    
+    func userDidChangeAmountInformation(info: String){
+        changeAmount = info
+    }
+    func userDidChangeCategoryInformation(info: String){
+        changeCategory = info
+    }
+    func userDidChangeDateInformation(info: String){
+        changeDate = info
+    }
+    func userDidChangeNoteInformation(info: String){
+        changeNote = info
+    }
+    func userDidChangeRecurringInformation(info: Bool){
+        changeRecurring = info
+    }
+    func userDidChangeTypeInformation(info: String){
+        changeType = info
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addExpenseFromRecords" {
@@ -173,10 +278,27 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             let incomeVC = segue.destination as! AddIncomeViewController
             incomeVC.delegate = self
         }
+        if segue.identifier == "toDetail" {
+            let changeVC = segue.destination as! EditTransactionViewController
+            changeVC.delegate = self
+            
+            let senderArray = sender as! [String]
+            
+            changeVC.amount = senderArray[0] as String
+            changeVC.category = senderArray[1] as String
+            changeVC.date = senderArray[2] as String
+            changeVC.note = senderArray[3] as String
+            if senderArray[4] == "true" {
+                changeVC.recurring = true
+            }
+            else {
+                changeVC.recurring = false
+            }
+            changeVC.type = senderArray[5] as String
+        }
     }
     
     func didTapAddExpense() {
-        type = "expense"
         performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
     }
     
@@ -185,9 +307,6 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             var newTransactions = [Transaction]()
             var transaction: Transaction?
             for itemSnapShot in snapshot.children {
-                print(snapshot)
-                print(snapshot.children)
-                print(itemSnapShot)
                 transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
                 newTransactions.append(transaction!)
             }

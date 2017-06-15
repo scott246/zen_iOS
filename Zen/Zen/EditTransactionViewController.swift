@@ -1,5 +1,5 @@
 //
-//  AddIncomeViewController.swift
+//  EditTransactionViewController.swift
 //  Zen
 //
 //  Created by Nathan Scott on 6/14/17.
@@ -12,31 +12,52 @@ import Firebase
 import FirebaseDatabase
 
 // protocol used for sending data back
-protocol IncomeDataEnteredDelegate: class {
-    func userDidEnterAmountInformation(info: String)
-    func userDidEnterCategoryInformation(info:String)
-    func userDidEnterDateInformation(info:String)
-    func userDidEnterNoteInformation(info:String)
-    func userDidEnterRecurringInformation(info:Bool)
-    func userDidEnterTypeInformation(info:String)
+protocol EditDataEnteredDelegate: class {
+    func userDidChangeAmountInformation(info: String)
+    func userDidChangeCategoryInformation(info: String)
+    func userDidChangeDateInformation(info: String)
+    func userDidChangeNoteInformation(info: String)
+    func userDidChangeRecurringInformation(info: Bool)
+    func userDidChangeTypeInformation(info: String)
 }
 
-class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    weak var delegate: ExpenseDataEnteredDelegate? = nil
+    var type: String!
+    var amount: String!
+    var category: String = "Uncategorized"
+    var date: String!
+    var note: String!
+    var recurring: Bool!
     
-    var pickerFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"];
+    weak var delegate: EditDataEnteredDelegate? = nil
+    
+    var expenseFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Decor", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Technology", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
+    var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
+    var pickerFields: [String]? = ["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"]
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerFields.count;
+        return pickerFields!.count;
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerFields[row]
+        return pickerFields?[row]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(type == "expense"){
+            pickerFields = expenseFields
+        }
+        else{
+            pickerFields = incomeFields
+        }
+        
+        
     }
     
     @IBOutlet weak var recurringExpenseLabel: UILabel!
@@ -50,8 +71,8 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         note = noteField.text!
     }
     @IBAction func recurringExpenseChanged(_ sender: Any) {
-        if recurringSwitch.isOn {recurringExpense = true}
-        else {recurringExpense = false}
+        if recurringSwitch.isOn {recurring = true}
+        else {recurring = false}
     }
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func datePickerChanged(_ sender: Any) {
@@ -91,12 +112,6 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     var user: User!
     var ref: DatabaseReference!
     
-    var amount:String = ""
-    var note:String = ""
-    var recurringExpense = false
-    var date:String = ""
-    var category:String = "Uncategorized"
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let invalidCharacters = CharacterSet(charactersIn: "0123456789.").inverted
         return string.rangeOfCharacter(from: invalidCharacters, options: [], range: string.startIndex ..< string.endIndex) == nil
@@ -116,11 +131,26 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         categoryPicker.isHidden = true
         datePicker.isHidden = true
         
-        let day = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
-        let today = formatter.string(from: day)
-        date = today
+        recurringSwitch.isOn = recurring
+        noteField.text! = note
+        amountField.text! = amount
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        let dateObj = dateFormatter.date(from: date)
+        datePicker.date = dateObj!
+        if type == "expense" {
+            categoryPicker.selectRow(expenseFields.index(where: {$0 == category})!, inComponent: 0, animated: true)
+        }
+        if type == "income" {
+            categoryPicker.selectRow(incomeFields.index(where: {$0 == category})!, inComponent: 0, animated: true)
+        }
+        categoryPicker.reloadAllComponents()
+        
+        //let day = Date()
+        //let formatter = DateFormatter()
+        //formatter.dateFormat = "MM-dd-yyyy"
+        //let today = formatter.string(from: day)
+        //date = today
         
     }
     
@@ -134,14 +164,19 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         amount = formatter.string(from: NSNumber(value: amt))!
         //amount = String(describing: (amountField.text! as NSString).doubleValue.)
         if (amount != "") {
-            delegate?.userDidEnterDateInformation(info: date)
+            delegate?.userDidChangeDateInformation(info: date)
             note = noteField.text!
-            delegate?.userDidEnterNoteInformation(info: note)
-            delegate?.userDidEnterAmountInformation(info: amount)
-            category = pickerFields[categoryPicker.selectedRow(inComponent: 0)]
-            delegate?.userDidEnterCategoryInformation(info: category)
-            delegate?.userDidEnterRecurringInformation(info: recurringExpense)
-            delegate?.userDidEnterTypeInformation(info: "income")
+            delegate?.userDidChangeNoteInformation(info: note)
+            delegate?.userDidChangeAmountInformation(info: amount)
+            category = (pickerFields?[categoryPicker.selectedRow(inComponent: 0)])!
+            delegate?.userDidChangeCategoryInformation(info: category)
+            delegate?.userDidChangeRecurringInformation(info: recurring)
+            if type != "expense" {
+                delegate?.userDidChangeTypeInformation(info: "income")
+            }
+            else {
+                delegate?.userDidChangeTypeInformation(info: "expense")
+            }
             _ = self.navigationController?.popViewController(animated: true)
         }
         else {

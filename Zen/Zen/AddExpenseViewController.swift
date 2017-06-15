@@ -18,13 +18,14 @@ protocol ExpenseDataEnteredDelegate: class {
     func userDidEnterDateInformation(info:String)
     func userDidEnterNoteInformation(info:String)
     func userDidEnterRecurringInformation(info:Bool)
+    func userDidEnterTypeInformation(info:String)
 }
 
 class AddExpenseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     weak var delegate: ExpenseDataEnteredDelegate? = nil
     
-    var pickerFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
+    var pickerFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Decor", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Technology", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
@@ -140,6 +141,7 @@ class AddExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
             category = pickerFields[categoryPicker.selectedRow(inComponent: 0)]
             delegate?.userDidEnterCategoryInformation(info: category)
             delegate?.userDidEnterRecurringInformation(info: recurringExpense)
+            delegate?.userDidEnterTypeInformation(info: "expense")
             _ = self.navigationController?.popViewController(animated: true)
         }
         else {

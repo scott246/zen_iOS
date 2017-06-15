@@ -183,7 +183,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="hkr-IC-hqv">
-                                <rect key="frame" x="67.5" y="277" width="240" height="240"/>
+                                <rect key="frame" x="67" y="277" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="m1a-bY-xWk"/>
                                     <constraint firstAttribute="width" constant="240" id="qty-pR-Wg3"/>
@@ -262,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MCj-4E-GS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6775.1999999999998" y="-306.29685157421289"/>
+            <point key="canvasLocation" x="6775" y="-306"/>
         </scene>
         <!--Budget-->
         <scene sceneID="aJ9-2c-cVZ">
@@ -354,6 +354,7 @@
                     <connections>
                         <segue destination="Qdq-Ku-MNl" kind="show" identifier="addExpenseFromRecords" id="0Ia-nF-o5J"/>
                         <segue destination="NkK-gp-w8p" kind="show" identifier="addIncomeFromRecords" id="T55-qh-i73"/>
+                        <segue destination="ZUm-3f-rtI" kind="show" identifier="toDetail" id="t6F-33-Ny8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ML2-LJ-h7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -939,7 +940,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbj-fd-7UB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6548" y="2067"/>
+            <point key="canvasLocation" x="6513" y="2067"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hDz-ax-lr0">
@@ -1186,7 +1187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaB-5V-twG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7904.8000000000002" y="-2464.3178410794603"/>
+            <point key="canvasLocation" x="7751" y="-1379"/>
         </scene>
         <!--Add Income-->
         <scene sceneID="xXg-Fg-JCB">
@@ -1315,7 +1316,136 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wQJ-Gb-8Z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8836" y="-2464"/>
+            <point key="canvasLocation" x="8575" y="-1379"/>
+        </scene>
+        <!--Edit Transaction-->
+        <scene sceneID="J8y-Wa-U8m">
+            <objects>
+                <viewController id="ZUm-3f-rtI" customClass="EditTransactionViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6cB-Zw-awF"/>
+                        <viewControllerLayoutGuide type="bottom" id="kRT-Mq-7u1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2C7-GG-9Li">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecL-yL-6h2">
+                                <rect key="frame" x="231" y="129" width="71" height="21"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tc2-J2-HUh">
+                                <rect key="frame" x="310" y="124" width="51" height="31"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="recurringExpenseChanged:" destination="ZUm-3f-rtI" eventType="valueChanged" id="hYG-W8-EEe"/>
+                                </connections>
+                            </switch>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vJs-QH-en0">
+                                <rect key="frame" x="255" y="175" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Ebo-3Y-esM"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Hzf-X0-1Qo"/>
+                                    <constraint firstAttribute="height" constant="30" id="NYS-Qm-yaL"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="fdt-86-CUv"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <connections>
+                                    <action selector="amountChanged:" destination="ZUm-3f-rtI" eventType="valueChanged" id="k5O-05-ujV"/>
+                                    <action selector="amountEntered:" destination="ZUm-3f-rtI" eventType="editingDidEnd" id="QJ1-Qx-FUK"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note (e.g. Rent, Groceries, etc.)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V4J-y6-Fyt">
+                                <rect key="frame" x="16" y="175" width="219" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="mih-h2-SEF"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <action selector="noteChanged:" destination="ZUm-3f-rtI" eventType="valueChanged" id="JKO-Bm-ely"/>
+                                    <action selector="noteEntered:" destination="ZUm-3f-rtI" eventType="editingDidEnd" id="OW4-5i-7I9"/>
+                                </connections>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BZw-xb-iym">
+                                <rect key="frame" x="81" y="72" width="212" height="29"/>
+                                <segments>
+                                    <segment title="Amount"/>
+                                    <segment title="Date"/>
+                                    <segment title="Category"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="segmenterChanged:" destination="ZUm-3f-rtI" eventType="valueChanged" id="6l0-fu-fdR"/>
+                                </connections>
+                            </segmentedControl>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vha-Im-0da">
+                                <rect key="frame" x="27" y="108" width="320" height="216"/>
+                            </pickerView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-eV-Rs0">
+                                <rect key="frame" x="27" y="108" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="519084644.57198799">
+                                    <!--2017-06-13 22:10:44 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerChanged:" destination="ZUm-3f-rtI" eventType="valueChanged" id="GAX-t1-MUK"/>
+                                </connections>
+                            </datePicker>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="QUv-oq-e5F">
+                                <rect key="frame" x="259" y="498" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="158-V4-AIw"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="70Z-cY-4th"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="O2H-Uf-adC"/>
+                                    <constraint firstAttribute="width" constant="100" id="fDL-o0-nF9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.66743861609999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="QUv-oq-e5F" firstAttribute="trailing" secondItem="2C7-GG-9Li" secondAttribute="trailingMargin" id="05M-aK-lud"/>
+                            <constraint firstItem="Vha-Im-0da" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="0vL-oW-PF1"/>
+                            <constraint firstItem="vJs-QH-en0" firstAttribute="leading" secondItem="V4J-y6-Fyt" secondAttribute="trailing" constant="20" id="6lV-0L-zF5"/>
+                            <constraint firstItem="tc2-J2-HUh" firstAttribute="top" secondItem="6cB-Zw-awF" secondAttribute="bottom" constant="60" id="8Nu-Ab-Nds"/>
+                            <constraint firstItem="tc2-J2-HUh" firstAttribute="leading" secondItem="ecL-yL-6h2" secondAttribute="trailing" constant="8" id="8Pr-LL-GOi"/>
+                            <constraint firstItem="tc2-J2-HUh" firstAttribute="leading" secondItem="ecL-yL-6h2" secondAttribute="trailing" constant="8" id="BB9-BP-7vu"/>
+                            <constraint firstItem="BZw-xb-iym" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="QhS-eo-dYQ"/>
+                            <constraint firstItem="BZw-xb-iym" firstAttribute="top" secondItem="6cB-Zw-awF" secondAttribute="bottom" constant="8" id="WLL-8x-paC"/>
+                            <constraint firstItem="vJs-QH-en0" firstAttribute="leading" secondItem="V4J-y6-Fyt" secondAttribute="trailing" constant="20" id="Zxf-qg-bOz"/>
+                            <constraint firstItem="V4J-y6-Fyt" firstAttribute="top" secondItem="ecL-yL-6h2" secondAttribute="bottom" constant="25" id="bpP-4X-vSc"/>
+                            <constraint firstItem="V4J-y6-Fyt" firstAttribute="leading" secondItem="2C7-GG-9Li" secondAttribute="leadingMargin" id="dEf-MR-1ix"/>
+                            <constraint firstItem="VWZ-eV-Rs0" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="eet-ZB-6yt"/>
+                            <constraint firstAttribute="trailing" secondItem="vJs-QH-en0" secondAttribute="trailing" constant="20" id="efr-jJ-V5W"/>
+                            <constraint firstItem="kRT-Mq-7u1" firstAttribute="top" secondItem="QUv-oq-e5F" secondAttribute="bottom" constant="20" id="f9X-32-Kvj"/>
+                            <constraint firstItem="tc2-J2-HUh" firstAttribute="trailing" secondItem="2C7-GG-9Li" secondAttribute="trailingMargin" id="gdg-Ob-GWt"/>
+                            <constraint firstItem="V4J-y6-Fyt" firstAttribute="top" secondItem="ecL-yL-6h2" secondAttribute="bottom" constant="25" id="gqr-g6-3ze"/>
+                            <constraint firstItem="Vha-Im-0da" firstAttribute="top" secondItem="BZw-xb-iym" secondAttribute="bottom" constant="8" id="igx-bl-1uQ"/>
+                            <constraint firstItem="vJs-QH-en0" firstAttribute="top" secondItem="tc2-J2-HUh" secondAttribute="bottom" constant="20" id="qYU-iF-PeL"/>
+                            <constraint firstItem="ecL-yL-6h2" firstAttribute="top" secondItem="BZw-xb-iym" secondAttribute="bottom" constant="29" id="sSK-y1-OHz"/>
+                            <constraint firstItem="VWZ-eV-Rs0" firstAttribute="top" secondItem="BZw-xb-iym" secondAttribute="bottom" constant="8" id="zLd-NP-DOF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Transaction" id="RkT-gB-fnX">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="MRa-d5-bQN"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="amountField" destination="vJs-QH-en0" id="YaW-7S-eXz"/>
+                        <outlet property="categoryPicker" destination="Vha-Im-0da" id="a1w-y6-tfV"/>
+                        <outlet property="datePicker" destination="VWZ-eV-Rs0" id="tIX-El-jDg"/>
+                        <outlet property="noteField" destination="V4J-y6-Fyt" id="tvw-UJ-ZQr"/>
+                        <outlet property="recurringExpenseLabel" destination="ecL-yL-6h2" id="UhV-cS-REI"/>
+                        <outlet property="recurringSwitch" destination="tc2-J2-HUh" id="zA6-5N-XO8"/>
+                        <outlet property="segmenter" destination="BZw-xb-iym" id="gZQ-4w-e19"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4S5-Ty-glb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9471" y="-1010"/>
         </scene>
     </scenes>
     <resources>
@@ -1335,7 +1465,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="XLU-IH-y3T"/>
         <segue reference="H8S-dx-5fx"/>
-        <segue reference="qao-Sc-B5N"/>
-        <segue reference="Ii1-wV-W6l"/>
+        <segue reference="0Ia-nF-o5J"/>
+        <segue reference="T55-qh-i73"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,7 @@
 		43BC89531EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89541EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89551EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
+		43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */; };
 		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
 		43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */; };
 		43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */; };
@@ -71,6 +72,7 @@
 		43BC89441EECB3EB003FC1CC /* ZenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenUITests.swift; sourceTree = "<group>"; };
 		43BC89461EECB3EB003FC1CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTransactionViewController.swift; sourceTree = "<group>"; };
 		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */,
 				4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */,
+				43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */,
 				4308E3111EF03206003DC1D6 /* RecordsViewController.swift */,
 			);
 			name = Records;
@@ -517,6 +520,7 @@
 				43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */,
 				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,
 				430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */,
+				43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */,
 				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 				43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */,
 			);
