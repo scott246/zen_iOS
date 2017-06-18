@@ -52,6 +52,7 @@ class CycleDurationViewController: UITableViewController {
             delegate?.userDidEnterCycleInformation(info: "Continuously")
             break
         default:
+            delegate?.userDidEnterCycleInformation(info: "Continuously")
             break
         }
         

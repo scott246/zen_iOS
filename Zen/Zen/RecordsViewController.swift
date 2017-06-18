@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+//transaction class
 class Transaction {
     
     var ref: DatabaseReference?
@@ -20,9 +21,9 @@ class Transaction {
     var note: String?
     var category: String?
     var recurring: Bool?
+    var recurType: String?
     var key: String?
 
-    
     init (snapshot: DataSnapshot) {
         ref = snapshot.ref
         var data = snapshot.value as! Dictionary<String, Any>
@@ -32,51 +33,114 @@ class Transaction {
         note = data["note"]! as? String
         category = data["category"]! as? String
         recurring = data["recurring"]! as? Bool
+        recurType = data["recurType"]! as? String
         key = data["key"]! as? String
     }
 }
 
 class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, IncomeDataEnteredDelegate, EditDataEnteredDelegate {
     
+    //data for each date is stored in sections and data such that the each data is mapped to a section
     var dateSections: [String]? = []
-    var dateData: [[String]]? = []
-    
+    var dateData: [[Transaction]]? = []
+
+    //when the date, amount, note, category, recurring, type, and key vars are filled, create a new transaction
     var records = 0 {
         didSet{
-            if records == 6 {
+            if records == 7 {
                 records = 0
-                let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                var dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                 key = dbref.key
-                let transDict = [
+                var transDict: [String: Any] = [
                     "date": date ?? "",
                     "amount": amount ?? "",
                     "note": note ?? "",
                     "category": category ?? "",
                     "recurring": recurring ?? false,
                     "type": type ?? "",
+                    "recurType": recurType ?? "",
                     "key": key ?? ""
-                ] as [String : Any]
-                createNewTransaction(transaction: transDict, transactionID: dbref)
+                    ]
+                //if its a recurring transaction in the past, add extra transactions between then and now
+                if transDict["recurring"] as! Bool == true {
+                    var d = transDict["date"] as! String
+                    let todayDate = Date()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    let tomorrowDate = Calendar.current.date(byAdding: .day, value: 1, to: todayDate)
+                    let tomorrow = formatter.string(from: tomorrowDate!)
+                    switch recurType {
+                    case "day"?:
+                        while d < tomorrow {
+                            transDict["date"] = d
+                            transDict["key"] = key
+                            createNewTransaction(transaction: transDict, transactionID: dbref)
+                            let newDate = formatter.date(from: d)
+                            let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
+                            d = formatter.string(from: nextDate!)
+                            dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            key = dbref.key
+                        }
+                        break
+                    case "week"?:
+                        while d < tomorrow {
+                            transDict["date"] = d
+                            transDict["key"] = key
+                            createNewTransaction(transaction: transDict, transactionID: dbref)
+                            let newDate = formatter.date(from: d)
+                            let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 day
+                            d = formatter.string(from: nextDate!)
+                            dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            key = dbref.key
+                        }
+                        break
+                    case "biweek"?:
+                        while d < tomorrow {
+                            transDict["date"] = d
+                            transDict["key"] = key
+                            createNewTransaction(transaction: transDict, transactionID: dbref)
+                            let newDate = formatter.date(from: d)
+                            let nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 1 day
+                            d = formatter.string(from: nextDate!)
+                            dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            key = dbref.key
+                        }
+                        break
+                    case "month"?:
+                        while d < tomorrow {
+                            transDict["date"] = d
+                            transDict["key"] = key
+                            createNewTransaction(transaction: transDict, transactionID: dbref)
+                            let newDate = formatter.date(from: d)
+                            let nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 day
+                            d = formatter.string(from: nextDate!)
+                            dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            key = dbref.key
+                        }
+                        break
+                    case "year"?:
+                        while d < tomorrow {
+                            transDict["date"] = d
+                            transDict["key"] = key
+                            createNewTransaction(transaction: transDict, transactionID: dbref)
+                            let newDate = formatter.date(from: d)
+                            let nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 day
+                            d = formatter.string(from: nextDate!)
+                            dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            key = dbref.key
+                        }
+                        break
+                    default:
+                        break
+                    }
+                }
+                //else just create one transaction
+                else {
+                    createNewTransaction(transaction: transDict, transactionID: dbref)
+                }
             }
         }
     }
-    
-    func createNewTransaction(transaction: Dictionary<String, Any>, transactionID: DatabaseReference) {
-        transactionID.setValue(transaction)
-    }
-    
-    func replaceTransaction(id: String) {
-        let post = ["date": changeDate ?? "",
-                    "amount": changeAmount ?? "",
-                    "note": changeNote ?? "",
-                    "category": changeCategory ?? "",
-                    "recurring": changeRecurring ?? false,
-                    "type": changeType ?? "",
-                    "key": id] as [String : Any]
-        let childUpdates = ["/users/\(self.user.uid)/transactions/\(id)/": post]
-        ref.updateChildValues(childUpdates)
-    }
-    
     var date: String?{
         didSet{
             records += 1
@@ -107,11 +171,20 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             records += 1
         }
     }
+    var recurType: String? {
+        didSet{
+            records += 1
+        }
+    }
     var key: String? = ""
+    func createNewTransaction(transaction: Dictionary<String, Any>, transactionID: DatabaseReference) {
+        transactionID.setValue(transaction)
+    }
     
+    //when the date, amount, note, category, recurring, type, and key vars are changed, replace the transaction at the given key
     var changeRecords = 0 {
         didSet{
-            if changeRecords == 6 {
+            if changeRecords == 7 {
                 changeRecords = 0
                 replaceTransaction(id: changeKey!)
             }
@@ -147,14 +220,35 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             changeRecords += 1
         }
     }
+    var changeRecurType: String? {
+        didSet{
+            changeRecords += 1
+        }
+    }
     var changeKey: String? = ""
+    func replaceTransaction(id: String) {
+        let post: [String:Any] = ["date": changeDate ?? "",
+                    "amount": changeAmount ?? "",
+                    "note": changeNote ?? "",
+                    "category": changeCategory ?? "",
+                    "recurring": changeRecurring ?? false,
+                    "type": changeType ?? "",
+                    "recurType": changeRecurType ?? "",
+                    "key": id] as [String : Any]
+        let childUpdates = ["/users/\(self.user.uid)/transactions/\(id)/": post]
+        ref.updateChildValues(childUpdates)
+    }
     
-    
-    var user: User!
+    //array of transactions from the database
     var transactions = [Transaction]()
+
+    //variables used to retrieve/send data from/to the database
+    var user: User!
     var ref: DatabaseReference!
     private var databaseHandle: DatabaseHandle!
+
     
+    //viewDidLoad() function: set database variables, set bar button items, start observing database
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Add Income", style: .plain, target: self, action: #selector(didTapAddIncome))], animated: true)
@@ -165,11 +259,18 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         startObservingDatabase()
     }
     
+    //bar button item functions: segue to respective pages
+    func didTapAddIncome() {
+        performSegue(withIdentifier: "addIncomeFromRecords", sender: nil)
+    }
+    func didTapAddExpense() {
+        performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
+    }
     
+    // MARK: table overrides
     override func numberOfSections(in tableView: UITableView) -> Int {
         return (dateSections?.count)!
     }
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
@@ -177,16 +278,13 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         formatter.minimumIntegerDigits = 1
         var total = 0.0
         for amountString in (dateData?[section])! {
-            total += Double(amountString) ?? 0.0
+            total += Double(amountString.amount!) ?? 0.0
         }
         return (dateSections?[section])!+": "+currency+formatter.string(from: NSNumber(value: total))!
     }
-
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dateData![section].count
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
         
@@ -213,22 +311,27 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         var sign: String = ""
         if transaction.type == "expense"{
             sign = "-"
-            cell.backgroundColor = UIColor.red
-            cell.textLabel?.textColor = UIColor.white
-            cell.detailTextLabel?.textColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.red
         }
         if transaction.type == "income"{
             sign = "+"
-            cell.backgroundColor = UIColor.blue
-            cell.textLabel?.textColor = UIColor.white
-            cell.detailTextLabel?.textColor = UIColor.white
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.blue
         }
-        cell.detailTextLabel?.text = transaction.date! + " (" + sign + currency + transaction.amount! + ")"
-        cell.textLabel?.text = transaction.category! + " (" + transaction.note! + ")"
+        if transaction.recurring! {
+            cell.detailTextLabel?.text = "(recurring every \(transaction.recurType!))" + sign + currency + transaction.amount!
+        }
+        else {
+            cell.detailTextLabel?.text = sign + currency + transaction.amount!
+        }
+        cell.textLabel?.text = transaction.note! + " (" + transaction.category! + ")"
         
         return cell
     }
-
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return dateSections
+    }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         var row = 0
         let ipsec = indexPath.section
@@ -245,8 +348,6 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             transaction.ref?.removeValue()
         }
     }
-
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var row = 0
         let ipsec = indexPath.section
@@ -272,16 +373,14 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         }
         let cellNote = transactions[row].note
         let cellType = transactions[row].type
+        let cellRecurType = transactions[row].recurType
 
-        let theSender = [cellAmount!, cellCategory!, cellDate!, cellNote!, cellRecurring!, cellType!]
+        let theSender = [cellAmount!, cellCategory!, cellDate!, cellNote!, cellRecurring!, cellRecurType!, cellType!]
         performSegue(withIdentifier: "toDetail", sender: theSender)
         changeKey = transactions[row].key
     }
     
-    func didTapAddIncome() {
-        performSegue(withIdentifier: "addIncomeFromRecords", sender: nil)
-    }
-    
+    //functions used to pass information from add/edit expense/income pages
     func userDidEnterNoteInformation(info: String) {
         note = info
     }
@@ -299,6 +398,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     }
     func userDidEnterTypeInformation(info: String) {
         type = info
+    }
+    func userDidEnterRecurTypeInformation(info: String) {
+        recurType = info
     }
     
     func userDidChangeAmountInformation(info: String){
@@ -319,7 +421,11 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     func userDidChangeTypeInformation(info: String){
         changeType = info
     }
+    func userDidChangeRecurTypeInformation(info: String){
+        changeRecurType = info
+    }
     
+    //function used to prepare segue for sending and receiving information to the pages
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addExpenseFromRecords" {
             let expenseVC = segue.destination as! AddExpenseViewController
@@ -341,81 +447,205 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             changeVC.note = senderArray[3] as String
             if senderArray[4] == "true" {
                 changeVC.recurring = true
+                changeVC.recurType = senderArray[5] as String
             }
             else {
                 changeVC.recurring = false
+                changeVC.recurType = senderArray[5] as String
             }
-            changeVC.type = senderArray[5] as String
+            changeVC.type = senderArray[6] as String
         }
     }
     
-    func didTapAddExpense() {
-        performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
-    }
-    
+    //function that retrieves information from the database any time there is a change
     func startObservingDatabase() {
+        var databaseHandleInProgress = false
+        var recurringTransactions = [Transaction]() {
+            didSet {
+                DispatchQueue.main.async{
+                    while databaseHandleInProgress == true {
+                        continue
+                    }
+                    self.doRecurringTransactions(recurringTransactions: recurringTransactions)
+                }
+            }
+        }
+        
         databaseHandle = ref.child("users/\(self.user.uid)/transactions").queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
+            databaseHandleInProgress = true
             var newTransactions = [Transaction]()
             var newDateSections = [String]()
-            var newDateData = [[String]]()
+            var newDateData = [[Transaction]]()
             var transaction: Transaction?
             for itemSnapShot in snapshot.children {
                 transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
-                
+                //if newDateSections already contains that date, append to the section data, otherwise make a new section entry and data entry
                 if !newDateSections.contains(where: {$0 == (transaction?.date)!}) {
                     newDateSections.append((transaction?.date)!)
                     if (transaction?.type)! == "expense" {
-                        newDateData.append(["-" + (transaction?.amount)!])
+                        //transaction?.amount = "-" + (transaction?.amount)!
+                        newDateData.append([transaction!])
                     }
                     else if (transaction?.type)! == "income" {
-                        newDateData.append([(transaction?.amount)!])
+                        newDateData.append([transaction!])
                     }
                 }
                 else {
                     if (transaction?.type)! == "expense" {
-                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append("-" + (transaction?.amount)!)
+                        //transaction?.amount = "-" + (transaction?.amount)!
+                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append(transaction!)
                     }
                     else if (transaction?.type)! == "income" {
-                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append((transaction?.amount)!)
+                        newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append(transaction!)
                     }
                 }
-                
+                //if it's a recurring entry, make it recur
+                if (transaction?.recurring)! {
+                    if !recurringTransactions.contains(where: {
+                        $0.amount == (transaction?.amount)! &&
+                        $0.category == (transaction?.category)! &&
+                        $0.note == (transaction?.note)! &&
+                        $0.recurring == (transaction?.recurring)! &&
+                        $0.recurType == (transaction?.recurType)! &&
+                        $0.type == (transaction?.type)!
+                        }){
+                        recurringTransactions.append(transaction!)
+                    }
+                }
                 newTransactions.append(transaction!)
             }
-            print(newDateSections)
-            print(newDateData)
-            
             //sort data
             let df = DateFormatter()
             df.dateFormat = "yyyy-MM-dd"
-            
-            
             let count = newDateSections.count
-            
-            // Create the array of tuples and sort according to the
-            // first tuple value (i.e. the first array)
             let sortedTuples =
                 (0..<count).map { (newDateSections[$0], newDateData[$0]) }.sorted { df.date(from: $0.0)! > df.date(from: $1.0)!}
-            
-            // Map over the sorted tuples array to separate out the
-            // original (now sorted) arrays.
             newDateSections = sortedTuples.map { $0.0 }
             newDateData = sortedTuples.map { $0.1 }
-            
-            
-            print(newDateSections)
-            print(newDateData)
             self.dateSections = newDateSections
             self.dateData = newDateData
             self.transactions = newTransactions
             DispatchQueue.main.async{
                 self.tableView.reloadData()
             }
-            
+            databaseHandleInProgress = false
         })
     }
     
+    func doRecurringTransactions(recurringTransactions: [Transaction]) {
+        print("-------------------")
+        print(recurringTransactions)
+        for transaction in recurringTransactions {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let transactionDate = formatter.date(from: (transaction.date)!)
+            var d: String = ""
+            //start next cycle
+            switch (transaction.recurType)! {
+            case "day":
+                d = formatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: transactionDate!)!)
+                break
+            case "week":
+                d = formatter.string(from: Calendar.current.date(byAdding: .day, value: 7, to: transactionDate!)!)
+                break
+            case "biweek":
+                d = formatter.string(from: Calendar.current.date(byAdding: .day, value: 14, to: transactionDate!)!)
+                break
+            case "month":
+                d = formatter.string(from: Calendar.current.date(byAdding: .month, value: 1, to: transactionDate!)!)
+                break
+            case "year":
+                d = formatter.string(from: Calendar.current.date(byAdding: .year, value: 1, to: transactionDate!)!)
+                break
+            default:
+                d = formatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: transactionDate!)!)
+                break
+            }
+            let todayDate = Date()
+            let tomorrowDate = Calendar.current.date(byAdding: .day, value: 1, to: todayDate) // += 1 day
+                //for every day after given date
+                //if d > lastLoginDate {
+                while d < formatter.string(from: tomorrowDate!) {
+                    if d > lastLogin {
+                        print(lastLogin)
+                        let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                        let dbkey = dbref.key
+                        var recurringTransactionFound: Bool? = nil
+                        //get next date transactions
+                        if dateSections?.index(of: d) != nil && (dateData?[(dateSections?.index(of: d))!]) != nil{
+                            print((dateData?[(dateSections?.index(of: d))!])!)
+                            for t in (dateData?[(dateSections?.index(of: d))!])! {
+                                //if theres a recurring transaction in DB and everything but key is the same
+                                if t.recurring == true &&
+                                    t.recurType == transaction.recurType &&
+                                    t.amount == transaction.amount &&
+                                    t.category == transaction.category &&
+                                    t.note == transaction.note &&
+                                    t.type == transaction.type {
+                                    recurringTransactionFound = true
+                                    break
+                                }
+                            }
+                            if recurringTransactionFound == nil {
+                                recurringTransactionFound = false
+                            }
+                        } else {
+                            recurringTransactionFound = false
+                        }
+                        if recurringTransactionFound == false {
+                            if !(dateSections?.contains(where: {$0 == d}))! {
+                                dateSections?.append(d)
+                                dateData?.append([transaction])
+                            }
+                            else {
+                                dateData?[(dateSections?.index(of: (dateSections?.first(where: {$0 == d}))!))!].append(transaction)
+                            }
+                            let td: [String: Any] = [
+                                "date": d,
+                                "amount": transaction.amount ?? "",
+                                "note": transaction.note ?? "",
+                                "category": transaction.category ?? "",
+                                "recurring": transaction.recurring ?? false,
+                                "type": transaction.type ?? "",
+                                "recurType": transaction.recurType ?? "",
+                                "key": dbkey
+                            ]
+                            self.createNewTransaction(transaction: td, transactionID: dbref)
+                            transactions.append(transaction)
+                        }
+                    }
+                    //increment date
+                    let newDate = formatter.date(from: d)
+                    var nextDate: Date?
+                    switch (transaction.recurType)! {
+                    case "day":
+                        nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
+                        break
+                    case "week":
+                        nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 wk
+                        break
+                    case "biweek":
+                        nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 2 wk
+                        break
+                    case "month":
+                        nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 mo
+                        break
+                    case "year":
+                        nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 yr
+                        break
+                    default:
+                        nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
+                        break
+                    }
+                    d = formatter.string(from: nextDate!)
+                }
+                //}
+        }
+    }
+    
     deinit {
-        ref.child("users/\(self.user.uid)/transactions").removeObserver(withHandle: databaseHandle)
+        if (databaseHandle != nil) {
+            ref.child("users/\(self.user.uid)/transactions").removeObserver(withHandle: databaseHandle)
+        }
     }
 }

@@ -27,17 +27,29 @@ class BudgetViewController: UIViewController {
         ref = Database.database().reference()
         
         var curr: String = ""
+        var cyc: String = ""
+        var ll: String = ""
         
         ref.child("users").child(self.user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as! NSDictionary
             curr = value["currency"] as? String ?? ""
+            currency = curr
+            cyc = value["cycle"] as? String ?? ""
+            cycle = cyc
+            ll = value["lastLogin"] as? String ?? "0"
+            lastLogin = ll
         }) { (error) in
             print(error.localizedDescription)
         }
         
         if curr == "" {
             self.ref.child("users").child(self.user.uid).child("currency").setValue("$")
+            currency = "$"
+        }
+        if cyc == "" {
+            self.ref.child("users").child(self.user.uid).child("cycle").setValue("Continuously")
+            cycle = "Continuously"
         }
     }
     

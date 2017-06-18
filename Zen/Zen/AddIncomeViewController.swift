@@ -19,26 +19,44 @@ protocol IncomeDataEnteredDelegate: class {
     func userDidEnterNoteInformation(info:String)
     func userDidEnterRecurringInformation(info:Bool)
     func userDidEnterTypeInformation(info:String)
+    func userDidEnterRecurTypeInformation(info:String)
 }
 
 class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    weak var delegate: ExpenseDataEnteredDelegate? = nil
+    var type: String!
+    var amount: String!
+    var category: String = "Uncategorized"
+    var date: String!
+    var note: String!
+    var recurring: Bool! = false
+    var recurType:String!
     
-    var pickerFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"];
+    weak var delegate: IncomeDataEnteredDelegate? = nil
+    
+    var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
+    var recurrenceFields = ["day", "week", "biweek", "month", "year"]
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerFields.count;
+        if (pickerView.tag == 1) {
+            return incomeFields.count
+        } else {
+            return recurrenceFields.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerFields[row]
+        if pickerView.tag == 1 {
+            return incomeFields[row]
+        }
+        else {
+            return recurrenceFields[row]
+        }
     }
-    
     @IBOutlet weak var recurringExpenseLabel: UILabel!
     @IBOutlet weak var recurringSwitch: UISwitch!
     @IBOutlet weak var noteField: UITextField!
@@ -50,10 +68,19 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         note = noteField.text!
     }
     @IBAction func recurringExpenseChanged(_ sender: Any) {
-        if recurringSwitch.isOn {recurringExpense = true}
-        else {recurringExpense = false}
+        if recurringSwitch.isOn {
+            recurring = true
+            segmenter.setEnabled(true, forSegmentAt: 2)
+        }
+        else {
+            recurring = false
+            segmenter.setEnabled(false, forSegmentAt: 2)
+        }
     }
+    @IBOutlet weak var startingLabel: UILabel!
+    @IBOutlet weak var recurCyclePicker: UIPickerView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var recurEveryLabel: UILabel!
     @IBAction func datePickerChanged(_ sender: Any) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -63,39 +90,46 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func segmenterChanged(_ sender: Any) {
         if segmenter.selectedSegmentIndex == 0 {
             categoryPicker.isHidden = true
-            datePicker.isHidden = true
+            datePicker.isHidden = false
             noteField.isHidden = false
             amountField.isHidden = false
             recurringSwitch.isHidden = false
             recurringExpenseLabel.isHidden = false
+            recurCyclePicker.isHidden = true
+            recurEveryLabel.isHidden = true
+            startingLabel.isHidden = true
         }
         else if segmenter.selectedSegmentIndex == 1 {
-            categoryPicker.isHidden = true
-            datePicker.isHidden = false
-            noteField.isHidden = true
-            amountField.isHidden = true
-            recurringSwitch.isHidden = true
-            recurringExpenseLabel.isHidden = true
-        }
-        else if segmenter.selectedSegmentIndex == 2 {
+            self.amountField.resignFirstResponder()
+            self.noteField.resignFirstResponder()
             categoryPicker.isHidden = false
             datePicker.isHidden = true
             noteField.isHidden = true
             amountField.isHidden = true
             recurringSwitch.isHidden = true
             recurringExpenseLabel.isHidden = true
+            recurCyclePicker.isHidden = true
+            recurEveryLabel.isHidden = true
+            startingLabel.isHidden = true
+        }
+        else if segmenter.selectedSegmentIndex == 2 {
+            self.amountField.resignFirstResponder()
+            self.noteField.resignFirstResponder()
+            categoryPicker.isHidden = true
+            datePicker.isHidden = false
+            noteField.isHidden = true
+            amountField.isHidden = true
+            recurringSwitch.isHidden = true
+            recurringExpenseLabel.isHidden = true
+            recurCyclePicker.isHidden = false
+            recurEveryLabel.isHidden = false
+            startingLabel.isHidden = false
         }
     }
     @IBOutlet weak var segmenter: UISegmentedControl!
     
     var user: User!
     var ref: DatabaseReference!
-    
-    var amount:String = ""
-    var note:String = ""
-    var recurringExpense = false
-    var date:String = ""
-    var category:String = "Uncategorized"
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let invalidCharacters = CharacterSet(charactersIn: "0123456789.").inverted
@@ -111,10 +145,23 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.categoryPicker.dataSource = self;
         self.categoryPicker.delegate = self;
         
-        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(returnToRecords)), animated: true)
+        self.recurCyclePicker.dataSource = self
+        self.recurCyclePicker.delegate = self
         
         categoryPicker.isHidden = true
-        datePicker.isHidden = true
+        recurCyclePicker.isHidden = true
+        recurEveryLabel.isHidden = true
+        startingLabel.isHidden = true
+        
+        recurringSwitch.isOn = recurring
+        if recurring {
+            segmenter.setEnabled(true, forSegmentAt: 2)
+        }
+        else {
+            segmenter.setEnabled(false, forSegmentAt: 2)
+        }
+        
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(returnToRecords)), animated: true)
         
         let day = Date()
         let formatter = DateFormatter()
@@ -122,33 +169,28 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let today = formatter.string(from: day)
         date = today
         
+        recurType = "day"
     }
     
     func returnToRecords() {
-        //amount = String(describing: Double(amountField.text!))
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
+        formatter.minimumIntegerDigits = 1
         var amt = 0.0
         amt = (amountField.text! as NSString).doubleValue
         amount = formatter.string(from: NSNumber(value: amt))!
-        //amount = String(describing: (amountField.text! as NSString).doubleValue.)
-        if (amount != "") {
-            delegate?.userDidEnterDateInformation(info: date)
-            note = noteField.text!
-            delegate?.userDidEnterNoteInformation(info: note)
-            delegate?.userDidEnterAmountInformation(info: amount)
-            category = pickerFields[categoryPicker.selectedRow(inComponent: 0)]
-            delegate?.userDidEnterCategoryInformation(info: category)
-            delegate?.userDidEnterRecurringInformation(info: recurringExpense)
-            delegate?.userDidEnterTypeInformation(info: "income")
-            _ = self.navigationController?.popViewController(animated: true)
-        }
-        else {
-            let alert = UIAlertController(title: "Amount Missing", message: "The amount field is required.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+        delegate?.userDidEnterDateInformation(info: date)
+        note = noteField.text!
+        delegate?.userDidEnterNoteInformation(info: note)
+        delegate?.userDidEnterAmountInformation(info: amount)
+        category = incomeFields[categoryPicker.selectedRow(inComponent: 0)]
+        delegate?.userDidEnterCategoryInformation(info: category)
+        delegate?.userDidEnterRecurringInformation(info: recurring)
+        delegate?.userDidEnterTypeInformation(info: "income")
+        recurType = recurrenceFields[recurCyclePicker.selectedRow(inComponent: 0)]
+        delegate?.userDidEnterRecurTypeInformation(info: recurType)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {

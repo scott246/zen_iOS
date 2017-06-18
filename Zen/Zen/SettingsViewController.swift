@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 
 var currency = "$"
+var cycle = "Continuously"
 
 class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate, CycleDataEnteredDelegate {
     
@@ -25,6 +26,8 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
         self.title = "Settings"
         user = Auth.auth().currentUser
         ref = Database.database().reference()
+        currencyLabel.text = currency
+        cycleLabel.text = cycle
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,7 +38,7 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 && indexPath.section == 0 { //reset cycle button
             //show an alert
-            let alert = UIAlertController(title: "Reset Cycles", message: "Are you sure you want to reset all your cycles?", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Reset Cycles", message: "Are you sure you want to reset all data from this cycle?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { action in
                 //delete all data
@@ -46,7 +49,8 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
         if indexPath.row == 2 && indexPath.section == 1 { //logout button
             do {
                 try Auth.auth().signOut()
-                self.performSegue(withIdentifier: "logout", sender: nil)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+                present(vc, animated: true, completion: nil)
             } catch {
                 print("couldn't sign out")
             }
@@ -58,7 +62,6 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
             alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { action in
                 //delete all data
                 self.ref.child("users/\(self.user.uid)/transactions").removeValue()
-                self.ref.child("users/\(self.user.uid)/currency").removeValue()
                 print("data reset")
             }))
             self.present(alert, animated: true, completion: nil)
@@ -82,10 +85,12 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
     func userDidEnterCurrencyInformation(info: String) {
         currencyLabel.text = info
         currency = info
-        self.ref.child("users").child(self.user.uid).child("currency").setValue(currencyLabel.text)
+        self.ref.child("users").child(self.user.uid).child("currency").setValue(info)
     }
     func userDidEnterCycleInformation(info: String) {
         cycleLabel.text = info
+        cycle = info
+        self.ref.child("users").child(self.user.uid).child("cycle").setValue(info)
     }
     
 }

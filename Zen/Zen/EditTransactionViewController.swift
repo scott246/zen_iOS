@@ -19,6 +19,7 @@ protocol EditDataEnteredDelegate: class {
     func userDidChangeNoteInformation(info: String)
     func userDidChangeRecurringInformation(info: Bool)
     func userDidChangeTypeInformation(info: String)
+    func userDidChangeRecurTypeInformation(info: String)
 }
 
 class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
@@ -29,23 +30,34 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
     var date: String!
     var note: String!
     var recurring: Bool!
+    var recurType: String!
     
     weak var delegate: EditDataEnteredDelegate? = nil
     
     var expenseFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Decor", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Technology", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
     var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
     var pickerFields: [String]? = []
+    var recurrenceFields = ["day", "week", "biweek", "month", "year"]
     
     func numberOfComponents(in: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerFields!.count;
+        if (pickerView.tag == 1) {
+            return pickerFields!.count
+        } else {
+            return recurrenceFields.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerFields?[row]
+        if pickerView.tag == 1 {
+            return pickerFields?[row]
+        }
+        else {
+            return recurrenceFields[row]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,8 +83,14 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         note = noteField.text!
     }
     @IBAction func recurringExpenseChanged(_ sender: Any) {
-        if recurringSwitch.isOn {recurring = true}
-        else {recurring = false}
+        if recurringSwitch.isOn {
+            recurring = true
+            segmenter.setEnabled(true, forSegmentAt: 2)
+        }
+        else {
+            recurring = false
+            segmenter.setEnabled(false, forSegmentAt: 2)
+        }
     }
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func datePickerChanged(_ sender: Any) {
@@ -81,30 +99,47 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         date = formatter.string(from: datePicker.date)
     }
     @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var startingLabel: UILabel!
+    @IBOutlet weak var recurEveryLabel: UILabel!
+    
+    @IBOutlet weak var recurCyclePicker: UIPickerView!
     @IBAction func segmenterChanged(_ sender: Any) {
         if segmenter.selectedSegmentIndex == 0 {
             categoryPicker.isHidden = true
-            datePicker.isHidden = true
+            datePicker.isHidden = false
             noteField.isHidden = false
             amountField.isHidden = false
             recurringSwitch.isHidden = false
             recurringExpenseLabel.isHidden = false
+            recurCyclePicker.isHidden = true
+            recurEveryLabel.isHidden = true
+            startingLabel.isHidden = true
         }
         else if segmenter.selectedSegmentIndex == 1 {
-            categoryPicker.isHidden = true
-            datePicker.isHidden = false
-            noteField.isHidden = true
-            amountField.isHidden = true
-            recurringSwitch.isHidden = true
-            recurringExpenseLabel.isHidden = true
-        }
-        else if segmenter.selectedSegmentIndex == 2 {
+            self.amountField.resignFirstResponder()
+            self.noteField.resignFirstResponder()
             categoryPicker.isHidden = false
             datePicker.isHidden = true
             noteField.isHidden = true
             amountField.isHidden = true
             recurringSwitch.isHidden = true
             recurringExpenseLabel.isHidden = true
+            recurCyclePicker.isHidden = true
+            recurEveryLabel.isHidden = true
+            startingLabel.isHidden = true
+        }
+        else if segmenter.selectedSegmentIndex == 2 {
+            self.amountField.resignFirstResponder()
+            self.noteField.resignFirstResponder()
+            categoryPicker.isHidden = true
+            datePicker.isHidden = false
+            noteField.isHidden = true
+            amountField.isHidden = true
+            recurringSwitch.isHidden = true
+            recurringExpenseLabel.isHidden = true
+            recurCyclePicker.isHidden = false
+            recurEveryLabel.isHidden = false
+            startingLabel.isHidden = false
         }
     }
     @IBOutlet weak var segmenter: UISegmentedControl!
@@ -126,12 +161,23 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         self.categoryPicker.dataSource = self;
         self.categoryPicker.delegate = self;
         
+        self.recurCyclePicker.dataSource = self
+        self.recurCyclePicker.delegate = self
+        
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(returnToRecords)), animated: true)
         
         categoryPicker.isHidden = true
-        datePicker.isHidden = true
+        recurCyclePicker.isHidden = true
+        recurEveryLabel.isHidden = true
+        startingLabel.isHidden = true
         
         recurringSwitch.isOn = recurring
+        if recurring {
+            segmenter.setEnabled(true, forSegmentAt: 2)
+        }
+        else {
+            segmenter.setEnabled(false, forSegmentAt: 2)
+        }
         noteField.text! = note
         amountField.text! = amount
         let dateFormatter = DateFormatter()
@@ -146,16 +192,9 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         }
         categoryPicker.reloadAllComponents()
         
-        //let day = Date()
-        //let formatter = DateFormatter()
-        //formatter.dateFormat = "yyyy-MM-dd"
-        //let today = formatter.string(from: day)
-        //date = today
-        
     }
     
     func returnToRecords() {
-        //amount = String(describing: Double(amountField.text!))
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -163,27 +202,21 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
         var amt = 0.0
         amt = (amountField.text! as NSString).doubleValue
         amount = formatter.string(from: NSNumber(value: amt))!
-        if (amount != "") {
-            delegate?.userDidChangeDateInformation(info: date)
-            note = noteField.text!
-            delegate?.userDidChangeNoteInformation(info: note)
-            delegate?.userDidChangeAmountInformation(info: amount)
-            category = (pickerFields?[categoryPicker.selectedRow(inComponent: 0)])!
-            delegate?.userDidChangeCategoryInformation(info: category)
-            delegate?.userDidChangeRecurringInformation(info: recurring)
-            if type != "expense" {
-                delegate?.userDidChangeTypeInformation(info: "income")
-            }
-            else {
-                delegate?.userDidChangeTypeInformation(info: "expense")
-            }
-            _ = self.navigationController?.popViewController(animated: true)
+        delegate?.userDidChangeDateInformation(info: date)
+        note = noteField.text!
+        delegate?.userDidChangeNoteInformation(info: note)
+        delegate?.userDidChangeAmountInformation(info: amount)
+        category = (pickerFields?[categoryPicker.selectedRow(inComponent: 0)])!
+        delegate?.userDidChangeCategoryInformation(info: category)
+        delegate?.userDidChangeRecurringInformation(info: recurring)
+        if type != "expense" {
+            delegate?.userDidChangeTypeInformation(info: "income")
         }
         else {
-            let alert = UIAlertController(title: "Amount Missing", message: "The amount field is required.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            delegate?.userDidChangeTypeInformation(info: "expense")
         }
+        delegate?.userDidChangeRecurTypeInformation(info: recurType)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
