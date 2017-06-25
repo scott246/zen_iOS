@@ -241,6 +241,17 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     
     //array of transactions from the database
     var transactions = [Transaction]()
+    var databaseHandleInProgress = false
+    var recurringTransactions = [Transaction]() {
+        didSet {
+            DispatchQueue.main.async{
+                while self.databaseHandleInProgress == true {
+                    continue
+                }
+                self.doRecurringTransactions()
+            }
+        }
+    }
 
     //variables used to retrieve/send data from/to the database
     var user: User!
@@ -477,20 +488,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     
     //function that retrieves information from the database any time there is a change
     func startObservingDatabase() {
-        var databaseHandleInProgress = false
-        var recurringTransactions = [Transaction]() {
-            didSet {
-                DispatchQueue.main.async{
-                    while databaseHandleInProgress == true {
-                        continue
-                    }
-                    self.doRecurringTransactions(recurringTransactions: recurringTransactions)
-                }
-            }
-        }
-        
+
         databaseHandle = ref.child("users/\(self.user.uid)/transactions").queryOrdered(byChild: "date").observe(.value, with: { (snapshot) in
-            databaseHandleInProgress = true
+            self.databaseHandleInProgress = true
             var newTransactions = [Transaction]()
             var newDateSections = [String]()
             var newDateData = [[Transaction]]()
@@ -519,7 +519,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                 }
                 //if it's a recurring entry, make it recur
                 if (transaction?.recurring)! {
-                    if !recurringTransactions.contains(where: {
+                    if !self.recurringTransactions.contains(where: {
                         $0.amount == (transaction?.amount)! &&
                         $0.category == (transaction?.category)! &&
                         $0.note == (transaction?.note)! &&
@@ -527,9 +527,31 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                         $0.recurType == (transaction?.recurType)! &&
                         $0.type == (transaction?.type)!
                         }){
-                        recurringTransactions.append(transaction!)
+                        self.recurringTransactions.append(transaction!)
                     }
                 }
+                //if its not a recurring entry, make it and its children stop recurring
+                /*if !(transaction?.recurring)! {
+                    if recurringTransactions.contains(where: {
+                        $0.amount == (transaction?.amount)! &&
+                        $0.category == (transaction?.category)! &&
+                        $0.note == (transaction?.note)! &&
+                        $0.recurring == (transaction?.recurring)! &&
+                        $0.recurType == (transaction?.recurType)! &&
+                        $0.type == (transaction?.type)!
+                        }){
+                        for t in self.transactions{
+                            if t.amount == transaction?.amount && t.category == transaction?.category && t.note == transaction?.note && t.recurring == transaction?.recurring && t.recurType == transaction?.recurType && t.type == transaction?.type
+                            {
+                                self.ref.child("users").child(self.user.uid).child("transactions").child(t.key!).updateChildValues(["recurring": false])
+                            }
+                        }
+                        
+                        recurringTransactions.remove(at: recurringTransactions.index(where: {$0.amount! == (transaction?.amount)! && $0.category! == (transaction?.category)! && $0.note! == (transaction?.note)! && $0.recurring! == (transaction?.recurring)! && $0.recurType! == (transaction?.recurType)! && $0.type! == (transaction?.type)!})!)
+                        
+                    }
+                    print(recurringTransactions)
+                }*/
                 newTransactions.append(transaction!)
             }
             //sort data
@@ -546,12 +568,27 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             DispatchQueue.main.async{
                 self.tableView.reloadData()
             }
-            databaseHandleInProgress = false
+            self.doRecurringTransactions()
+            self.databaseHandleInProgress = false
         })
     }
-    
-    func doRecurringTransactions(recurringTransactions: [Transaction]) {
+
+    func doRecurringTransactions() {
+        var z = 0
         for transaction in recurringTransactions {
+            if transactions.contains(where: {
+                $0.amount == (transaction.amount)! && $0.category == (transaction.category)! && $0.note == (transaction.note)! && $0.recurring == true && $0.recurType == (transaction.recurType)! && $0.type == (transaction.type)!}) && transactions.contains(where: { $0.amount == (transaction.amount)! && $0.category == (transaction.category)! && $0.note == (transaction.note)! && $0.recurring == false && $0.recurType == (transaction.recurType)! && $0.type == (transaction.type)!}){
+                    for t in self.transactions{
+                        if t.amount == transaction.amount && t.category == transaction.category && t.note == transaction.note && t.recurring == transaction.recurring && t.recurType == transaction.recurType && t.type == transaction.type
+                        {
+                            self.ref.child("users").child(self.user.uid).child("transactions").child(t.key!).updateChildValues(["recurring": false])
+                        }
+                    }
+                    
+                    recurringTransactions.remove(at: recurringTransactions.index(where: {$0.amount! == (transaction.amount)! && $0.category! == (transaction.category)! && $0.note! == (transaction.note)! && $0.recurring! == (transaction.recurring)! && $0.recurType! == (transaction.recurType)! && $0.type! == (transaction.type)!})!)
+                    
+                }
+                print(recurringTransactions)
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let transactionDate = formatter.date(from: (transaction.date)!)
@@ -579,83 +616,81 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             }
             let todayDate = Date()
             let tomorrowDate = Calendar.current.date(byAdding: .day, value: 1, to: todayDate) // += 1 day
-                //for every day after given date
-                //if d > lastLoginDate {
-                while d < formatter.string(from: tomorrowDate!) {
-                    if d > lastLogin {
-
-                        let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
-                        let dbkey = dbref.key
-                        var recurringTransactionFound: Bool? = nil
-                        //get next date transactions
-                        if dateSections?.index(of: d) != nil && (dateData?[(dateSections?.index(of: d))!]) != nil{
-                            print((dateData?[(dateSections?.index(of: d))!])!)
-                            for t in (dateData?[(dateSections?.index(of: d))!])! {
-                                //if theres a recurring transaction in DB and everything but key is the same
-                                if t.recurring == true &&
-                                    t.recurType == transaction.recurType &&
-                                    t.amount == transaction.amount &&
-                                    t.category == transaction.category &&
-                                    t.note == transaction.note &&
-                                    t.type == transaction.type {
-                                    recurringTransactionFound = true
-                                    break
-                                }
+            //for every day after given date
+            while d < formatter.string(from: tomorrowDate!) {
+                if d > lastLogin {
+                    let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                    let dbkey = dbref.key
+                    var recurringTransactionFound: Bool? = nil
+                    //get next date transactions
+                    if dateSections?.index(of: d) != nil && (dateData?[(dateSections?.index(of: d))!]) != nil{
+                        print((dateData?[(dateSections?.index(of: d))!])!)
+                        for t in (dateData?[(dateSections?.index(of: d))!])! {
+                            //if theres a recurring transaction in DB and everything but key is the same
+                            if t.recurring == true &&
+                                t.recurType == transaction.recurType &&
+                                t.amount == transaction.amount &&
+                                t.category == transaction.category &&
+                                t.note == transaction.note &&
+                                t.type == transaction.type {
+                                recurringTransactionFound = true
+                                break
                             }
-                            if recurringTransactionFound == nil {
-                                recurringTransactionFound = false
-                            }
-                        } else {
+                        }
+                        if recurringTransactionFound == nil {
                             recurringTransactionFound = false
                         }
-                        if recurringTransactionFound == false {
-                            if !(dateSections?.contains(where: {$0 == d}))! {
-                                dateSections?.append(d)
-                                dateData?.append([transaction])
-                            }
-                            else {
-                                dateData?[(dateSections?.index(of: (dateSections?.first(where: {$0 == d}))!))!].append(transaction)
-                            }
-                            let td: [String: Any] = [
-                                "date": d,
-                                "amount": transaction.amount ?? "",
-                                "note": transaction.note ?? "",
-                                "category": transaction.category ?? "",
-                                "recurring": transaction.recurring ?? false,
-                                "type": transaction.type ?? "",
-                                "recurType": transaction.recurType ?? "",
-                                "key": dbkey
-                            ]
-                            self.createNewTransaction(transaction: td, transactionID: dbref)
-                            transactions.append(transaction)
+                    } else {
+                        recurringTransactionFound = false
+                    }
+                    if recurringTransactionFound == false {
+                        if !(dateSections?.contains(where: {$0 == d}))! {
+                            dateSections?.append(d)
+                            dateData?.append([transaction])
                         }
+                        else {
+                            dateData?[(dateSections?.index(of: (dateSections?.first(where: {$0 == d}))!))!].append(transaction)
+                        }
+                        let td: [String: Any] = [
+                            "date": d,
+                            "amount": transaction.amount ?? "",
+                            "note": transaction.note ?? "",
+                            "category": transaction.category ?? "",
+                            "recurring": transaction.recurring ?? false,
+                            "type": transaction.type ?? "",
+                            "recurType": transaction.recurType ?? "",
+                            "key": dbkey
+                        ]
+                        self.createNewTransaction(transaction: td, transactionID: dbref)
+                        transactions.append(transaction)
                     }
-                    //increment date
-                    let newDate = formatter.date(from: d)
-                    var nextDate: Date?
-                    switch (transaction.recurType)! {
-                    case "day":
-                        nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
-                        break
-                    case "week":
-                        nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 wk
-                        break
-                    case "biweek":
-                        nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 2 wk
-                        break
-                    case "month":
-                        nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 mo
-                        break
-                    case "year":
-                        nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 yr
-                        break
-                    default:
-                        nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
-                        break
-                    }
-                    d = formatter.string(from: nextDate!)
                 }
-                //}
+                //increment date
+                let newDate = formatter.date(from: d)
+                var nextDate: Date?
+                switch (transaction.recurType)! {
+                case "day":
+                    nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
+                    break
+                case "week":
+                    nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 wk
+                    break
+                case "biweek":
+                    nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 2 wk
+                    break
+                case "month":
+                    nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 mo
+                    break
+                case "year":
+                    nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 yr
+                    break
+                default:
+                    nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
+                    break
+                }
+                d = formatter.string(from: nextDate!)
+            }
+            z += 1
         }
     }
     
