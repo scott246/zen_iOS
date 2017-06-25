@@ -30,17 +30,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0Pi-di-DHV">
-                                <rect key="frame" x="178" y="443" width="20" height="20"/>
-                                <color key="color" red="0.021390109800000001" green="0.81290479270000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="P6B-ck-RRw" secondAttribute="bottom" constant="20" id="3ze-UK-WtN"/>
                             <constraint firstItem="lYn-hd-Vdv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4Jk-Z0-JOe"/>
-                            <constraint firstItem="0Pi-di-DHV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="NCz-sy-G93"/>
-                            <constraint firstItem="0Pi-di-DHV" firstAttribute="top" secondItem="lYn-hd-Vdv" secondAttribute="bottom" constant="10" id="W4f-Rq-vsB"/>
                             <constraint firstItem="lYn-hd-Vdv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WgJ-aR-00y"/>
                             <constraint firstItem="P6B-ck-RRw" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ruN-pR-sFg"/>
                         </constraints>

@@ -252,7 +252,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Add Income", style: .plain, target: self, action: #selector(didTapAddIncome))], animated: true)
-        self.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Add Expense", style: .plain, target: self, action: #selector(didTapAddExpense))], animated: true)
+        self.navigationItem.setRightBarButtonItems(
+            [UIBarButtonItem(title: "Add Expense", style: .plain, target: self, action: #selector(didTapAddExpense)),
+             UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))], animated: true)
         
         user = Auth.auth().currentUser
         ref = Database.database().reference()
@@ -266,6 +268,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     func didTapAddExpense() {
         performSegue(withIdentifier: "addExpenseFromRecords", sender: nil)
     }
+    func didTapSearch() {
+        performSegue(withIdentifier: "toSearch", sender: self)
+    }
     
     // MARK: table overrides
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -278,7 +283,13 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         formatter.minimumIntegerDigits = 1
         var total = 0.0
         for amountString in (dateData?[section])! {
-            total += Double(amountString.amount!) ?? 0.0
+            if amountString.type == "expense"{
+                total -= Double(amountString.amount!) ?? 0.0
+            }
+            else {
+                total += Double(amountString.amount!) ?? 0.0
+            }
+            
         }
         return (dateSections?[section])!+": "+currency+formatter.string(from: NSNumber(value: total))!
     }
@@ -320,7 +331,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             cell.detailTextLabel?.textColor = UIColor.blue
         }
         if transaction.recurring! {
-            cell.detailTextLabel?.text = "(recurring every \(transaction.recurType!))" + sign + currency + transaction.amount!
+            cell.detailTextLabel?.text = "(recurring every \(transaction.recurType!)) " + sign + currency + transaction.amount!
         }
         else {
             cell.detailTextLabel?.text = sign + currency + transaction.amount!
@@ -455,6 +466,13 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             }
             changeVC.type = senderArray[6] as String
         }
+        if segue.identifier == "toSearch" {
+            let searchVC = segue.destination as! RecordsSearchViewController
+            searchVC.delegate = self
+            searchVC.dateData = dateData!
+            searchVC.dateSections = dateSections!
+            searchVC.transactions = transactions
+        }
     }
     
     //function that retrieves information from the database any time there is a change
@@ -533,8 +551,6 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     }
     
     func doRecurringTransactions(recurringTransactions: [Transaction]) {
-        print("-------------------")
-        print(recurringTransactions)
         for transaction in recurringTransactions {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
@@ -567,7 +583,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                 //if d > lastLoginDate {
                 while d < formatter.string(from: tomorrowDate!) {
                     if d > lastLogin {
-                        print(lastLogin)
+
                         let dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                         let dbkey = dbref.key
                         var recurringTransactionFound: Bool? = nil

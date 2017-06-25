@@ -13,6 +13,8 @@
 		430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */; };
 		4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */; };
 		4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E3111EF03206003DC1D6 /* RecordsViewController.swift */; };
+		434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */; };
+		434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */; };
 		438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */; };
 		43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89241EECB3EB003FC1CC /* AppDelegate.swift */; };
 		43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89261EECB3EB003FC1CC /* LoginViewController.swift */; };
@@ -57,6 +59,8 @@
 		4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleDurationViewController.swift; sourceTree = "<group>"; };
 		4308E3111EF03206003DC1D6 /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchViewController.swift; sourceTree = "<group>"; };
+		434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchTableViewController.swift; sourceTree = "<group>"; };
 		438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
 		43BC89211EECB3EB003FC1CC /* Zen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BC89241EECB3EB003FC1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */,
 				4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */,
 				43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */,
+				4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */,
+				434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */,
 				4308E3111EF03206003DC1D6 /* RecordsViewController.swift */,
 			);
 			name = Records;
@@ -511,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */,
 				43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */,
 				43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */,
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
@@ -521,6 +528,7 @@
 				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,
 				430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */,
 				43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */,
+				434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */,
 				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 				43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */,
 			);

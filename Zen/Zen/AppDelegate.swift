@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         df.dateFormat = "yyyy-MM-dd"
         lastLogin = df.string(from: Date())
         if (Auth.auth().currentUser != nil){
-            Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).setValue(["lastLogin": lastLogin])
+            Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("lastLogin").setValue(lastLogin)
         }
     }
 
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         df.dateFormat = "yyyy-MM-dd"
         lastLogin = df.string(from: Date())
         if (Auth.auth().currentUser != nil){
-            Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).setValue(["lastLogin": lastLogin])
+            Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!).child("lastLogin").setValue(lastLogin)
         }
         
     }
