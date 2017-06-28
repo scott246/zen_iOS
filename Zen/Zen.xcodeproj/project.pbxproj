@@ -15,6 +15,7 @@
 		4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E3111EF03206003DC1D6 /* RecordsViewController.swift */; };
 		434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */; };
 		434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */; };
+		434797951F01D2600017DCDE /* SavingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797941F01D2600017DCDE /* SavingsViewController.swift */; };
 		438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */; };
 		43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89241EECB3EB003FC1CC /* AppDelegate.swift */; };
 		43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89261EECB3EB003FC1CC /* LoginViewController.swift */; };
@@ -61,6 +62,7 @@
 		4308E3111EF03206003DC1D6 /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchViewController.swift; sourceTree = "<group>"; };
 		434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchTableViewController.swift; sourceTree = "<group>"; };
+		434797941F01D2600017DCDE /* SavingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsViewController.swift; sourceTree = "<group>"; };
 		438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
 		43BC89211EECB3EB003FC1CC /* Zen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BC89241EECB3EB003FC1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,15 @@
 			name = Records;
 			sourceTree = "<group>";
 		};
+		434797931F01D2490017DCDE /* Budget */ = {
+			isa = PBXGroup;
+			children = (
+				43FBC7421EECDE1100283477 /* BudgetViewController.swift */,
+				434797941F01D2600017DCDE /* SavingsViewController.swift */,
+			);
+			name = Budget;
+			sourceTree = "<group>";
+		};
 		438D9B6F1EEF87C500831E32 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +210,10 @@
 			isa = PBXGroup;
 			children = (
 				43BC89241EECB3EB003FC1CC /* AppDelegate.swift */,
+				434797931F01D2490017DCDE /* Budget */,
 				4307260C1EF09FBF005C78EE /* Login */,
 				431842F91EF0E17C00D51052 /* Records */,
 				438D9B6F1EEF87C500831E32 /* Settings */,
-				43FBC7421EECDE1100283477 /* BudgetViewController.swift */,
 				43BC892D1EECB3EB003FC1CC /* LaunchScreen.storyboard */,
 				43BC89281EECB3EB003FC1CC /* Main.storyboard */,
 				43BC892B1EECB3EB003FC1CC /* Assets.xcassets */,
@@ -523,6 +534,7 @@
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
 				4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */,
+				434797951F01D2600017DCDE /* SavingsViewController.swift in Sources */,
 				438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */,
 				43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */,
 				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,

@@ -50,7 +50,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             if records == 7 {
                 records = 0
                 var dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                var dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                 key = dbref.key
+                var savKey = dbref2.key
                 var transDict: [String: Any] = [
                     "date": date ?? "",
                     "amount": amount ?? "",
@@ -61,6 +63,16 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                     "recurType": recurType ?? "",
                     "key": key ?? ""
                     ]
+                var savingsDict: [String: Any] = [
+                    "date": savingsDate ?? "",
+                    "amount": savingsAmount ?? "",
+                    "note": savingsNote ?? "",
+                    "category": savingsCategory ?? "",
+                    "recurring": savingsRecurring ?? false,
+                    "type": savingsType ?? "",
+                    "recurType": savingsRecurType ?? "",
+                    "key": savKey
+                ]
                 //if its a recurring transaction in the past, add extra transactions between then and now
                 if transDict["recurring"] as! Bool == true {
                     var d = transDict["date"] as! String
@@ -73,61 +85,96 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                     case "day"?:
                         while d < tomorrow {
                             transDict["date"] = d
+                            savingsDict["date"] = d
                             transDict["key"] = key
+                            savingsDict["key"] = savKey
                             createNewTransaction(transaction: transDict, transactionID: dbref)
+                            if transDict["type"] as! String == "income" {
+                                createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                            }
                             let newDate = formatter.date(from: d)
                             let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: newDate!) // += 1 day
                             d = formatter.string(from: nextDate!)
                             dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                             key = dbref.key
+                            savKey = dbref2.key
                         }
                         break
                     case "week"?:
                         while d < tomorrow {
                             transDict["date"] = d
+                            savingsDict["date"] = d
                             transDict["key"] = key
+                            savingsDict["key"] = savKey
                             createNewTransaction(transaction: transDict, transactionID: dbref)
+                            if transDict["type"] as! String == "income" {
+                                createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                            }
                             let newDate = formatter.date(from: d)
-                            let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 day
+                            let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: newDate!) // += 1 wk
                             d = formatter.string(from: nextDate!)
                             dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                             key = dbref.key
+                            savKey = dbref2.key
                         }
                         break
                     case "biweek"?:
                         while d < tomorrow {
                             transDict["date"] = d
+                            savingsDict["date"] = d
                             transDict["key"] = key
+                            savingsDict["key"] = savKey
                             createNewTransaction(transaction: transDict, transactionID: dbref)
+                            if transDict["type"] as! String == "income" {
+                                createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                            }
                             let newDate = formatter.date(from: d)
-                            let nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 1 day
+                            let nextDate = Calendar.current.date(byAdding: .day, value: 14, to: newDate!) // += 14 day
                             d = formatter.string(from: nextDate!)
                             dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                             key = dbref.key
+                            savKey = dbref2.key
                         }
                         break
                     case "month"?:
                         while d < tomorrow {
                             transDict["date"] = d
+                            savingsDict["date"] = d
                             transDict["key"] = key
+                            savingsDict["key"] = savKey
                             createNewTransaction(transaction: transDict, transactionID: dbref)
+                            if transDict["type"] as! String == "income" {
+                                createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                            }
                             let newDate = formatter.date(from: d)
-                            let nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 day
+                            let nextDate = Calendar.current.date(byAdding: .month, value: 1, to: newDate!) // += 1 mo
                             d = formatter.string(from: nextDate!)
                             dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                             key = dbref.key
+                            savKey = dbref2.key
                         }
                         break
                     case "year"?:
                         while d < tomorrow {
                             transDict["date"] = d
+                            savingsDict["date"] = d
                             transDict["key"] = key
+                            savingsDict["key"] = savKey
                             createNewTransaction(transaction: transDict, transactionID: dbref)
+                            if transDict["type"] as! String == "income" {
+                                createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                            }
                             let newDate = formatter.date(from: d)
-                            let nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 day
+                            let nextDate = Calendar.current.date(byAdding: .year, value: 1, to: newDate!) // += 1 yr
                             d = formatter.string(from: nextDate!)
                             dbref = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
+                            dbref2 = self.ref.child("users").child(self.user.uid).child("transactions").childByAutoId()
                             key = dbref.key
+                            savKey = dbref2.key
                         }
                         break
                     default:
@@ -137,6 +184,9 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                 //else just create one transaction
                 else {
                     createNewTransaction(transaction: transDict, transactionID: dbref)
+                    if transDict["type"] as! String == "income" {
+                        createNewTransaction(transaction: savingsDict, transactionID: dbref2)
+                    }
                 }
             }
         }
@@ -176,6 +226,15 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             records += 1
         }
     }
+    var savingsDate: String?
+    var savingsAmount: String?
+    var savingsNote: String?
+    var savingsCategory: String?
+    var savingsRecurring: Bool?
+    var savingsType: String?
+    var savingsRecurType: String?
+    var savingsKey: String?
+    
     var key: String? = ""
     func createNewTransaction(transaction: Dictionary<String, Any>, transactionID: DatabaseReference) {
         transactionID.setValue(transaction)
@@ -341,6 +400,11 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             cell.textLabel?.textColor = UIColor.black
             cell.detailTextLabel?.textColor = UIColor.blue
         }
+        if transaction.type == "savings" {
+            sign = "+"
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.green
+        }
         if transaction.recurring! {
             cell.detailTextLabel?.text = "(recurring every \(transaction.recurType!)) " + sign + currency + transaction.amount!
         }
@@ -425,6 +489,28 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
         recurType = info
     }
     
+    func savingsNoteInformation(info: String) {
+        savingsNote = info
+    }
+    func savingsDateInformation(info: String) {
+        savingsDate = info
+    }
+    func savingsAmountInformation(info: String) {
+        savingsAmount = info
+    }
+    func savingsCategoryInformation(info: String) {
+        savingsCategory = info
+    }
+    func savingsRecurringInformation(info: Bool) {
+        savingsRecurring = info
+    }
+    func savingsTypeInformation(info: String) {
+        savingsType = info
+    }
+    func savingsRecurTypeInformation(info: String) {
+        savingsRecurType = info
+    }
+    
     func userDidChangeAmountInformation(info: String){
         changeAmount = info
     }
@@ -504,7 +590,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                         //transaction?.amount = "-" + (transaction?.amount)!
                         newDateData.append([transaction!])
                     }
-                    else if (transaction?.type)! == "income" {
+                    else {
                         newDateData.append([transaction!])
                     }
                 }
@@ -513,7 +599,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
                         //transaction?.amount = "-" + (transaction?.amount)!
                         newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append(transaction!)
                     }
-                    else if (transaction?.type)! == "income" {
+                    else {
                         newDateData[(newDateSections.index(of: (newDateSections.first(where: {$0 == (transaction?.date)!}))!))!].append(transaction!)
                     }
                 }

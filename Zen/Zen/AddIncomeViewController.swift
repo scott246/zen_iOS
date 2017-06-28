@@ -20,6 +20,14 @@ protocol IncomeDataEnteredDelegate: class {
     func userDidEnterRecurringInformation(info:Bool)
     func userDidEnterTypeInformation(info:String)
     func userDidEnterRecurTypeInformation(info:String)
+    
+    func savingsAmountInformation(info: String)
+    func savingsCategoryInformation(info: String)
+    func savingsDateInformation(info:String)
+    func savingsNoteInformation(info:String)
+    func savingsRecurringInformation(info:Bool)
+    func savingsTypeInformation(info:String)
+    func savingsRecurTypeInformation(info:String)
 }
 
 class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
@@ -178,18 +186,29 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         formatter.maximumFractionDigits = 2
         formatter.minimumIntegerDigits = 1
         var amt = 0.0
-        amt = (amountField.text! as NSString).doubleValue
+        var sav = 0.0
+        amt = Double((amountField.text! as NSString).floatValue * (1 - (savings/Float(100))))
+        sav = Double((amountField.text! as NSString).floatValue * (savings/Float(100)))
         amount = formatter.string(from: NSNumber(value: amt))!
+        let saving = formatter.string(from: NSNumber(value: sav))!
         delegate?.userDidEnterDateInformation(info: date)
+        delegate?.savingsDateInformation(info: date)
         note = noteField.text!
         delegate?.userDidEnterNoteInformation(info: note)
+        delegate?.savingsNoteInformation(info: String(describing: savings) + "% savings from " + note)
         delegate?.userDidEnterAmountInformation(info: amount)
+        delegate?.savingsAmountInformation(info: saving)
         category = incomeFields[categoryPicker.selectedRow(inComponent: 0)]
         delegate?.userDidEnterCategoryInformation(info: category)
+        delegate?.savingsCategoryInformation(info: "Savings")
         delegate?.userDidEnterRecurringInformation(info: recurring)
+        delegate?.savingsRecurringInformation(info: recurring)
         delegate?.userDidEnterTypeInformation(info: "income")
+        delegate?.savingsTypeInformation(info: "savings")
         recurType = recurrenceFields[recurCyclePicker.selectedRow(inComponent: 0)]
+        delegate?.savingsRecurTypeInformation(info: recurType)
         delegate?.userDidEnterRecurTypeInformation(info: recurType)
+        
         _ = self.navigationController?.popViewController(animated: true)
     }
     
