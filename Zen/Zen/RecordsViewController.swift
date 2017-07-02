@@ -406,7 +406,7 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
             cell.detailTextLabel?.textColor = UIColor.green
         }
         if transaction.recurring! {
-            cell.detailTextLabel?.text = "(recurring every \(transaction.recurType!)) " + sign + currency + transaction.amount!
+            cell.detailTextLabel?.text = sign + currency + transaction.amount! + " (recurring every \(transaction.recurType!))"
         }
         else {
             cell.detailTextLabel?.text = sign + currency + transaction.amount!

@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
                 self.regSuccessLabel.text = "Registered as \(email ?? "a user")."
                 Database.database().reference().child("users/\((Auth.auth().currentUser?.uid)!)").updateChildValues([
                     "currency": "$",
-                    "cycle": "Monthly",
                     "lastlogin": "0",
                     "savings": 20,
                     "account": 0.00,
@@ -89,7 +88,6 @@ class LoginViewController: UIViewController {
                     else {
                         Database.database().reference().child("users/\((Auth.auth().currentUser?.uid)!)").updateChildValues([
                             "currency": "$",
-                            "cycle": "Monthly",
                             "lastlogin": "0",
                             "savings": 20,
                             "account": 0.00,

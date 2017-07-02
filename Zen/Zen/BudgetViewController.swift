@@ -26,54 +26,19 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         emailDisplay.text = "\(getEmail())"
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         user = Auth.auth().currentUser
         ref = Database.database().reference()
-        
         ref.child("users/\(self.user.uid)/account").observeSingleEvent(of: .value, with: {(snapshot) in
             let value = snapshot.value as? Float ?? 0.00
             totalAssets = value
         })
-
-        var budgetNumber = 0.00
-        var savingsNumber = 0.00
-        var totalNumber = totalAssets
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
-        formatter.minimumIntegerDigits = 1
-        ref.child("users").child(self.user.uid).child("transactions").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            for itemSnapShot in snapshot.children {
-                let transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
-                if transaction.type == "expense" {
-                    budgetNumber -= formatter.number(from: transaction.amount!) as! Double
-                    totalNumber -= formatter.number(from: transaction.amount!) as! Float
-                }
-                if transaction.type == "income" {
-                    budgetNumber += formatter.number(from: transaction.amount!) as! Double
-                    totalNumber += formatter.number(from: transaction.amount!) as! Float
-                }
-                if transaction.type == "savings" {
-                    savingsNumber += formatter.number(from: transaction.amount!) as! Double
-                    totalNumber += formatter.number(from: transaction.amount!) as! Float
-                }
-            }
-            if budgetNumber >= 0 {
-                self.budgetLabel.textColor = UIColor.blue
-            }
-            else {
-                self.budgetLabel.textColor = UIColor.red
-            }
-            self.budgetLabel.text = currency + formatter.string(from: NSNumber(value: budgetNumber))!
-            self.savingsLabel.text = currency + formatter.string(from: NSNumber(value: savingsNumber))!
-            self.accountLabel.text = currency + formatter.string(from: NSNumber(value: totalNumber))!
+        ref.child("users/\(self.user.uid)/savings").observeSingleEvent(of: .value, with: {(snapshot) in
+            let value = snapshot.value as? Float ?? 0.00
+            savings = value
         })
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         var budgetNumber = 0.00
         var savingsNumber = 0.00
         var totalNumber = totalAssets
@@ -85,17 +50,28 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
             
             for itemSnapShot in snapshot.children {
                 let transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
+                let df = DateFormatter()
+                df.dateFormat = "yyyy-MM"
+                let md = df.string(from: Date())
                 if transaction.type == "expense" {
-                    budgetNumber -= formatter.number(from: transaction.amount!) as! Double
                     totalNumber -= formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "income" {
-                    budgetNumber += formatter.number(from: transaction.amount!) as! Double
                     totalNumber += formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "savings" {
-                    savingsNumber += formatter.number(from: transaction.amount!) as! Double
                     totalNumber += formatter.number(from: transaction.amount!) as! Float
+                }
+                if (transaction.date?.contains(md))! {
+                    if transaction.type == "expense" {
+                        budgetNumber -= formatter.number(from: transaction.amount!) as! Double
+                    }
+                    if transaction.type == "income" {
+                        budgetNumber += formatter.number(from: transaction.amount!) as! Double
+                    }
+                    if transaction.type == "savings" {
+                        savingsNumber += formatter.number(from: transaction.amount!) as! Double
+                    }
                 }
             }
             if budgetNumber >= 0 {

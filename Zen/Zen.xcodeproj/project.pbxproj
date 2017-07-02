@@ -11,7 +11,6 @@
 		1927F574CCE5FF671720957E /* Pods_ZenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100E88B8FF036A46423ACE86 /* Pods_ZenTests.framework */; };
 		4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */; };
 		430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */; };
-		4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */; };
 		4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4308E3111EF03206003DC1D6 /* RecordsViewController.swift */; };
 		434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */; };
 		434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */; };
@@ -64,7 +63,6 @@
 		25E762A5A28B31B024BB874C /* Pods-ZenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZenTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZenTests/Pods-ZenTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4307260D1EF0A1A5005C78EE /* AddExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		4307260F1EF0A1B5005C78EE /* AddIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
-		4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleDurationViewController.swift; sourceTree = "<group>"; };
 		4308E3111EF03206003DC1D6 /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchViewController.swift; sourceTree = "<group>"; };
 		434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchTableViewController.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */,
-				4308E30F1EEF9BA9003DC1D6 /* CycleDurationViewController.swift */,
 				43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */,
 			);
 			name = Settings;
@@ -561,7 +558,6 @@
 				43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */,
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
-				4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */,
 				43ED38D31F0957E100A4A0D4 /* GoalOverviewCell.swift in Sources */,
 				4347979B1F08337E0017DCDE /* Setup1ViewController.swift in Sources */,
 				434797A01F083A3E0017DCDE /* Setup3ViewController.swift in Sources */,

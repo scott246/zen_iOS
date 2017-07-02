@@ -195,12 +195,12 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         delegate?.savingsDateInformation(info: date)
         note = noteField.text!
         delegate?.userDidEnterNoteInformation(info: note)
-        delegate?.savingsNoteInformation(info: String(describing: savings) + "% savings from " + note)
+        delegate?.savingsNoteInformation(info: note + " Savings")
         delegate?.userDidEnterAmountInformation(info: amount)
         delegate?.savingsAmountInformation(info: saving)
         category = incomeFields[categoryPicker.selectedRow(inComponent: 0)]
         delegate?.userDidEnterCategoryInformation(info: category)
-        delegate?.savingsCategoryInformation(info: "Savings")
+        delegate?.savingsCategoryInformation(info: String(describing: savings) + "%")
         delegate?.userDidEnterRecurringInformation(info: recurring)
         delegate?.savingsRecurringInformation(info: recurring)
         delegate?.userDidEnterTypeInformation(info: "income")

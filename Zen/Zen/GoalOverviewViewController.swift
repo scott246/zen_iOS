@@ -11,12 +11,21 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class GoalOverviewViewController: UICollectionViewController {
+class GoalOverviewViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
+        self.navigationItem.setRightBarButton(
+            UIBarButtonItem(title: "Edit Goals", style: .plain, target: self, action: #selector(didTapEditGoals)), animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.labelValues = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         Database.database().reference().child("users/\((Auth.auth().currentUser?.uid)!)/transactions").observeSingleEvent(of: .value, with: {(snapshot) in
             for itemSnapShot in snapshot.children {
                 let transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
-                if transaction.type == "expense" {
+                let df = DateFormatter()
+                df.dateFormat = "yyyy-MM"
+                let md = df.string(from: Date())
+                if transaction.type == "expense" && (transaction.date?.contains(md))! {
                     for label in self.labels {
                         if transaction.category == label {
                             self.labelValues[self.labels.index(of: label)!] += Float(transaction.amount!)!
@@ -25,10 +34,9 @@ class GoalOverviewViewController: UICollectionViewController {
                 }
             }
         })
-        print(self.labelValues)
-        self.navigationItem.setRightBarButton(
-            UIBarButtonItem(title: "Edit Goals", style: .plain, target: self, action: #selector(didTapEditGoals)), animated: true)
+        self.collectionView?.reloadData()
     }
+    
     func didTapEditGoals() {
         performSegue(withIdentifier: "editGoal", sender: nil)
     }
@@ -57,5 +65,8 @@ class GoalOverviewViewController: UICollectionViewController {
             }
         })
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width - 16, height: 100)
     }
 }
