@@ -42,7 +42,7 @@ class AddIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     weak var delegate: IncomeDataEnteredDelegate? = nil
     
-    var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
+    var incomeFields = ["Uncategorized", "Bonus", "Gift & Donation", "Investment Return", "Other", "Paycheck", "Payment", "Return", "Sale"]
     var recurrenceFields = ["day", "week", "biweek", "month", "year"]
     
     func numberOfComponents(in: UIPickerView) -> Int {

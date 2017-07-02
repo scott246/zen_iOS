@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+var totalAssets: Float = 0.00
 
 class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, ExpenseDataEnteredDelegate {
     var user: User!
@@ -19,6 +20,7 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
     @IBOutlet weak var emailDisplay: UILabel!
     @IBOutlet weak var budgetLabel: UILabel!
     @IBOutlet weak var savingsLabel: UILabel!
+    @IBOutlet weak var accountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,26 +29,15 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
         
         user = Auth.auth().currentUser
         ref = Database.database().reference()
-        ref.child("users").child(self.user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as! NSDictionary
-            currency = value["currency"] as? String ?? ""
-            cycle = value["cycle"] as? String ?? ""
-            lastLogin = value["lastLogin"] as? String ?? "0"
-            savings = value["savings"] as? Float ?? 0.0
-        }) { (error) in
-            print(error.localizedDescription)
-        }
         
-        if currency == "" || currency == "$"{
-            self.ref.child("users").child(self.user.uid).child("currency").setValue("$")
-            currency = "$"
-        }
-        if cycle == "" || cycle == "Continuously" {
-            self.ref.child("users").child(self.user.uid).child("cycle").setValue("Continuously")
-            cycle = "Continuously"
-        }
+        ref.child("users/\(self.user.uid)/account").observeSingleEvent(of: .value, with: {(snapshot) in
+            let value = snapshot.value as? Float ?? 0.00
+            totalAssets = value
+        })
+
         var budgetNumber = 0.00
         var savingsNumber = 0.00
+        var totalNumber = totalAssets
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -57,12 +48,15 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
                 let transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
                 if transaction.type == "expense" {
                     budgetNumber -= formatter.number(from: transaction.amount!) as! Double
+                    totalNumber -= formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "income" {
                     budgetNumber += formatter.number(from: transaction.amount!) as! Double
+                    totalNumber += formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "savings" {
                     savingsNumber += formatter.number(from: transaction.amount!) as! Double
+                    totalNumber += formatter.number(from: transaction.amount!) as! Float
                 }
             }
             if budgetNumber >= 0 {
@@ -73,6 +67,7 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
             }
             self.budgetLabel.text = currency + formatter.string(from: NSNumber(value: budgetNumber))!
             self.savingsLabel.text = currency + formatter.string(from: NSNumber(value: savingsNumber))!
+            self.accountLabel.text = currency + formatter.string(from: NSNumber(value: totalNumber))!
         })
         
         
@@ -81,6 +76,7 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
     override func viewDidAppear(_ animated: Bool) {
         var budgetNumber = 0.00
         var savingsNumber = 0.00
+        var totalNumber = totalAssets
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
@@ -91,12 +87,15 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
                 let transaction = Transaction(snapshot: itemSnapShot as! DataSnapshot)
                 if transaction.type == "expense" {
                     budgetNumber -= formatter.number(from: transaction.amount!) as! Double
+                    totalNumber -= formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "income" {
                     budgetNumber += formatter.number(from: transaction.amount!) as! Double
+                    totalNumber += formatter.number(from: transaction.amount!) as! Float
                 }
                 if transaction.type == "savings" {
                     savingsNumber += formatter.number(from: transaction.amount!) as! Double
+                    totalNumber += formatter.number(from: transaction.amount!) as! Float
                 }
             }
             if budgetNumber >= 0 {
@@ -107,6 +106,7 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
             }
             self.budgetLabel.text = currency + formatter.string(from: NSNumber(value: budgetNumber))!
             self.savingsLabel.text = currency + formatter.string(from: NSNumber(value: savingsNumber))!
+            self.accountLabel.text = currency + formatter.string(from: NSNumber(value: totalNumber))!
         })
         
     }

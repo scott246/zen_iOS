@@ -34,8 +34,8 @@ class EditTransactionViewController: UIViewController, UIPickerViewDelegate, UIP
     
     weak var delegate: EditDataEnteredDelegate? = nil
     
-    var expenseFields = ["Uncategorized", "Automotive", "Bills", "Coffee", "Clothing", "Children", "Decor", "Donations", "Drinks", "Education", "Entertainment", "Family", "Fitness", "Food", "Games", "Gas", "General", "Gifts", "Groceries", "Haircuts", "Health", "Hobbies", "Household", "Laundry", "Leisure", "Loan", "Motorcycle", "Music", "Other", "Payment", "Personal", "Pets", "Restaurant", "Shopping", "Significant Other", "Smoking", "Social", "Technology", "Tools", "Transportation", "Travel", "Treats", "Vacations", "Work"];
-    var incomeFields = ["Uncategorized", "Bonus", "Donation", "Extra Income", "Gift", "Investment", "Other", "Payday", "Payment", "Sale"]
+    var expenseFields = ["Uncategorized", "Automotive & Transportation", "Bills & Utilities", "Business Services", "Charges & Fees", "Donations & Gifts", "Drinks & Social", "Education", "Entertainment", "Family & Children", "Food & Restaurants", "Health & Fitness", "Home", "Investments", "Payments & Loans", "Personal", "Pets", "Shopping", "Taxes", "Travel", "Other"]
+    var incomeFields = ["Uncategorized", "Bonus", "Gift & Donation", "Investment Return", "Other", "Paycheck", "Payment", "Return", "Sale"]
     var pickerFields: [String]? = []
     var recurrenceFields = ["day", "week", "biweek", "month", "year"]
     

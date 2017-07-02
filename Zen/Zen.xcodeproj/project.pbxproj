@@ -16,6 +16,9 @@
 		434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */; };
 		434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */; };
 		434797951F01D2600017DCDE /* SavingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434797941F01D2600017DCDE /* SavingsViewController.swift */; };
+		4347979B1F08337E0017DCDE /* Setup1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979A1F08337E0017DCDE /* Setup1ViewController.swift */; };
+		4347979E1F0836450017DCDE /* Setup2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979D1F0836450017DCDE /* Setup2ViewController.swift */; };
+		434797A01F083A3E0017DCDE /* Setup3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979F1F083A3E0017DCDE /* Setup3ViewController.swift */; };
 		438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */; };
 		43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89241EECB3EB003FC1CC /* AppDelegate.swift */; };
 		43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89261EECB3EB003FC1CC /* LoginViewController.swift */; };
@@ -27,7 +30,10 @@
 		43BC89531EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89541EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BC89551EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
+		43BD2C7B1F08868E005E0810 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD2C7A1F08868E005E0810 /* GoalViewController.swift */; };
+		43BD2C7D1F092C05005E0810 /* GoalOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */; };
 		43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */; };
+		43ED38D31F0957E100A4A0D4 /* GoalOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */; };
 		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
 		43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */; };
 		43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */; };
@@ -63,6 +69,9 @@
 		4347978F1EF6149A0017DCDE /* RecordsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchViewController.swift; sourceTree = "<group>"; };
 		434797911EF617CE0017DCDE /* RecordsSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsSearchTableViewController.swift; sourceTree = "<group>"; };
 		434797941F01D2600017DCDE /* SavingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingsViewController.swift; sourceTree = "<group>"; };
+		4347979A1F08337E0017DCDE /* Setup1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup1ViewController.swift; sourceTree = "<group>"; };
+		4347979D1F0836450017DCDE /* Setup2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup2ViewController.swift; sourceTree = "<group>"; };
+		4347979F1F083A3E0017DCDE /* Setup3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup3ViewController.swift; sourceTree = "<group>"; };
 		438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
 		43BC89211EECB3EB003FC1CC /* Zen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BC89241EECB3EB003FC1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +87,10 @@
 		43BC89441EECB3EB003FC1CC /* ZenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenUITests.swift; sourceTree = "<group>"; };
 		43BC89461EECB3EB003FC1CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		43BD2C7A1F08868E005E0810 /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
+		43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewViewController.swift; sourceTree = "<group>"; };
 		43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTransactionViewController.swift; sourceTree = "<group>"; };
+		43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewCell.swift; sourceTree = "<group>"; };
 		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		43F2EA7E1EEDA2B500088973 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -170,8 +182,21 @@
 			children = (
 				43FBC7421EECDE1100283477 /* BudgetViewController.swift */,
 				434797941F01D2600017DCDE /* SavingsViewController.swift */,
+				43BD2C7A1F08868E005E0810 /* GoalViewController.swift */,
+				43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */,
+				43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */,
 			);
 			name = Budget;
+			sourceTree = "<group>";
+		};
+		4347979C1F08338D0017DCDE /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				4347979A1F08337E0017DCDE /* Setup1ViewController.swift */,
+				4347979D1F0836450017DCDE /* Setup2ViewController.swift */,
+				4347979F1F083A3E0017DCDE /* Setup3ViewController.swift */,
+			);
+			name = Setup;
 			sourceTree = "<group>";
 		};
 		438D9B6F1EEF87C500831E32 /* Settings */ = {
@@ -214,6 +239,7 @@
 				4307260C1EF09FBF005C78EE /* Login */,
 				431842F91EF0E17C00D51052 /* Records */,
 				438D9B6F1EEF87C500831E32 /* Settings */,
+				4347979C1F08338D0017DCDE /* Setup */,
 				43BC892D1EECB3EB003FC1CC /* LaunchScreen.storyboard */,
 				43BC89281EECB3EB003FC1CC /* Main.storyboard */,
 				43BC892B1EECB3EB003FC1CC /* Assets.xcassets */,
@@ -528,14 +554,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43BD2C7B1F08868E005E0810 /* GoalViewController.swift in Sources */,
 				434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */,
 				43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */,
+				4347979E1F0836450017DCDE /* Setup2ViewController.swift in Sources */,
 				43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */,
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
 				4308E3101EEF9BA9003DC1D6 /* CycleDurationViewController.swift in Sources */,
+				43ED38D31F0957E100A4A0D4 /* GoalOverviewCell.swift in Sources */,
+				4347979B1F08337E0017DCDE /* Setup1ViewController.swift in Sources */,
+				434797A01F083A3E0017DCDE /* Setup3ViewController.swift in Sources */,
 				434797951F01D2600017DCDE /* SavingsViewController.swift in Sources */,
 				438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */,
+				43BD2C7D1F092C05005E0810 /* GoalOverviewViewController.swift in Sources */,
 				43F2EA7F1EEDA2B500088973 /* AboutViewController.swift in Sources */,
 				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,
 				430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */,
