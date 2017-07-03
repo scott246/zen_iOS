@@ -498,10 +498,10 @@ Copyrights
             </objects>
             <point key="canvasLocation" x="2504.8000000000002" y="-306.29685157421289"/>
         </scene>
-        <!--Budget-->
+        <!--budget-->
         <scene sceneID="aJ9-2c-cVZ">
             <objects>
-                <viewController id="Qed-81-4NE" customClass="BudgetViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="budget" title="budget" id="Qed-81-4NE" customClass="BudgetViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jt5-3V-Guk"/>
                         <viewControllerLayoutGuide type="bottom" id="EUa-3z-ekJ"/>
@@ -581,19 +581,19 @@ Copyrights
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80e-oX-WTJ">
-                                <rect key="frame" x="16" y="385" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="384" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtR-dZ-MrO">
-                                <rect key="frame" x="16" y="263" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="262" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-4K-Kce">
-                                <rect key="frame" x="16" y="291.5" width="343" height="86"/>
+                                <rect key="frame" x="16" y="290.5" width="343" height="86"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                 <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1098,12 +1098,12 @@ Copyrights
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbj-fd-7UB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6772" y="1270"/>
+            <point key="canvasLocation" x="7777" y="475"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hDz-ax-lr0">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="G6f-bR-OrW" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="init2" automaticallyAdjustsScrollViewInsets="NO" id="G6f-bR-OrW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="6tU-ly-CgO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="l7s-Nh-3AB">
@@ -1125,7 +1125,7 @@ Copyrights
         <!--Budget-->
         <scene sceneID="dBs-eY-K2L">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qzb-hP-71I" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="init" automaticallyAdjustsScrollViewInsets="NO" id="Qzb-hP-71I" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Budget" image="Budget" selectedImage="Budget" id="BVW-IO-HxN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oTr-dS-jeP">
@@ -1144,7 +1144,7 @@ Copyrights
         <!--Record-->
         <scene sceneID="hz0-ru-zRn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u0f-py-4w1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="initrecord" automaticallyAdjustsScrollViewInsets="NO" id="u0f-py-4w1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Record" image="Record" selectedImage="Record" id="LUp-83-471"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b4B-EC-vXV">
@@ -1163,7 +1163,7 @@ Copyrights
         <!--Analysis-->
         <scene sceneID="oeR-Xc-EX8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UtP-ID-Stm" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="initanalysis" automaticallyAdjustsScrollViewInsets="NO" id="UtP-ID-Stm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Analysis" image="Analysis" selectedImage="Analysis" id="tkk-pf-dLk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qaI-Kn-rd3">
@@ -1345,7 +1345,7 @@ Copyrights
         <!--Settings-->
         <scene sceneID="H7f-GM-RvR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7VN-Kz-0jq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="initsettings" automaticallyAdjustsScrollViewInsets="NO" id="7VN-Kz-0jq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="Settings" id="FBx-bf-Cdo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rmv-uJ-k4Y">
@@ -1614,10 +1614,10 @@ Copyrights
             </objects>
             <point key="canvasLocation" x="8650" y="-618"/>
         </scene>
-        <!--Add Expense-->
+        <!--addExpense-->
         <scene sceneID="b8l-lW-EFF">
             <objects>
-                <viewController id="uh3-AC-Ivq" customClass="AddExpenseViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addExpense" title="addExpense" id="uh3-AC-Ivq" customClass="AddExpenseViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Acv-MS-C8z"/>
                         <viewControllerLayoutGuide type="bottom" id="200-NA-4Hk"/>
@@ -1761,10 +1761,10 @@ Copyrights
             </objects>
             <point key="canvasLocation" x="7777" y="-1379"/>
         </scene>
-        <!--Add Income-->
+        <!--addIncome-->
         <scene sceneID="FuZ-aC-3gt">
             <objects>
-                <viewController id="Qep-II-l4D" customClass="AddIncomeViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addIncome" title="addIncome" id="Qep-II-l4D" customClass="AddIncomeViewController" customModule="Zen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kMN-uK-akF"/>
                         <viewControllerLayoutGuide type="bottom" id="nyZ-3F-g3q"/>
@@ -1927,7 +1927,7 @@ Copyrights
                                 <rect key="frame" x="37.5" y="0.0" width="300" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="301" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--/--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKY-Bj-rkV">
@@ -2045,7 +2045,7 @@ Copyrights
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bXC-MB-aNj"/>
-        <segue reference="d3h-pE-7Fb"/>
+        <segue reference="YDR-x8-oyq"/>
         <segue reference="XLU-IH-y3T"/>
         <segue reference="cFk-q5-TWI"/>
         <segue reference="cqw-X7-B3Q"/>

@@ -56,6 +56,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if (Auth.auth().currentUser != nil){
+            if shortcutItem.type == "com.scott246.Zen.addExpense" {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "addExpense") as! AddExpenseViewController
+                let tab = sb.instantiateViewController(withIdentifier: "init2") as! UITabBarController
+                let budget = sb.instantiateViewController(withIdentifier: "init") as! UINavigationController
+                let record = sb.instantiateViewController(withIdentifier: "initrecord") as! UINavigationController
+                let analysis = sb.instantiateViewController(withIdentifier: "initanalysis") as! UINavigationController
+                let settings = sb.instantiateViewController(withIdentifier: "initsettings") as! UINavigationController
+                //let login = sb.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+                window?.rootViewController = tab
+                tab.setViewControllers([budget,record,analysis,settings], animated: false)
+                budget.pushViewController(vc, animated: true)
+                //window?.rootViewController?.addChildViewController(budget)
+                //window?.rootViewController?.performSegue(withIdentifier: "addExpenseFromBudget", sender: nil)
+                //let delegate = UIApplication.shared.delegate as! AppDelegate
+                //delegate.window?.rootViewController!.present(budget, animated: false, completion: nil)
+                //delegate.window?.rootViewController!.present(vc, animated: true, completion: { () -> Void in
+                //    completionHandler(true)
+                //})
+                completionHandler(true)
+            }
+            else if shortcutItem.type == "com.scott246.Zen.addIncome" {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "addIncome") as! AddIncomeViewController
+                let tab = sb.instantiateViewController(withIdentifier: "init2") as! UITabBarController
+                let budget = sb.instantiateViewController(withIdentifier: "init") as! UINavigationController
+                let record = sb.instantiateViewController(withIdentifier: "initrecord") as! UINavigationController
+                let analysis = sb.instantiateViewController(withIdentifier: "initanalysis") as! UINavigationController
+                let settings = sb.instantiateViewController(withIdentifier: "initsettings") as! UINavigationController
+                window?.rootViewController = tab
+                tab.setViewControllers([budget,record,analysis,settings], animated: false)
+                budget.pushViewController(vc, animated: true)
+                completionHandler(true)
+            }
+        }
+        
+    }
 
 
 }

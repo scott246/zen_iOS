@@ -235,8 +235,8 @@
 		43BC89231EECB3EB003FC1CC /* Zen */ = {
 			isa = PBXGroup;
 			children = (
-				43D246691F099C1300E7FD5C /* Analysis */,
 				43BC89241EECB3EB003FC1CC /* AppDelegate.swift */,
+				43D246691F099C1300E7FD5C /* Analysis */,
 				434797931F01D2490017DCDE /* Budget */,
 				4307260C1EF09FBF005C78EE /* Login */,
 				431842F91EF0E17C00D51052 /* Records */,
