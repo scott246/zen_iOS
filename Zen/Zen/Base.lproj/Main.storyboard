@@ -53,6 +53,15 @@
                                     <action selector="nextButtonClicked:" destination="fKj-YN-Ihh" eventType="touchUpInside" id="PPV-1Q-PyG"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="szp-cl-taH">
+                                <rect key="frame" x="259" y="547" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="N3I-DK-PRD"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="V2N-1U-3UN"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="acS-0o-kys"/>
+                                    <constraint firstAttribute="width" constant="100" id="zTW-br-NXK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -60,12 +69,14 @@
                             <constraint firstItem="Fkt-tr-ydl" firstAttribute="centerX" secondItem="0wA-d6-Jso" secondAttribute="centerX" id="5Tz-1H-njd"/>
                             <constraint firstItem="Fkt-tr-ydl" firstAttribute="leading" secondItem="0wA-d6-Jso" secondAttribute="leadingMargin" constant="8" id="5ib-my-Ll2"/>
                             <constraint firstItem="ZqD-G1-y7D" firstAttribute="top" secondItem="k2L-Ur-DQa" secondAttribute="bottom" constant="8" id="AAM-LP-eRE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="szp-cl-taH" secondAttribute="trailing" constant="8" id="Ftn-44-lvF"/>
                             <constraint firstItem="Fkt-tr-ydl" firstAttribute="top" secondItem="nlp-P1-D8k" secondAttribute="bottom" constant="8" id="TRe-vP-Vss"/>
                             <constraint firstItem="nlp-P1-D8k" firstAttribute="centerX" secondItem="0wA-d6-Jso" secondAttribute="centerX" id="U5X-Zc-xH1"/>
                             <constraint firstItem="bQa-Nh-RKE" firstAttribute="top" secondItem="Fkt-tr-ydl" secondAttribute="bottom" constant="8" id="gcQ-fN-YXu"/>
                             <constraint firstItem="ZqD-G1-y7D" firstAttribute="centerX" secondItem="0wA-d6-Jso" secondAttribute="centerX" id="iTK-oh-ogK"/>
                             <constraint firstItem="bQa-Nh-RKE" firstAttribute="centerX" secondItem="0wA-d6-Jso" secondAttribute="centerX" id="p74-HV-zxy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fkt-tr-ydl" secondAttribute="trailing" constant="8" id="pbb-b8-V5B"/>
+                            <constraint firstItem="ajP-zn-5UG" firstAttribute="top" secondItem="szp-cl-taH" secondAttribute="bottom" constant="20" id="zn7-Pn-Jh1"/>
                         </constraints>
                     </view>
                     <connections>
@@ -126,6 +137,15 @@ This can be changed later.</string>
                                     <action selector="nextButtonClicked:" destination="5Wi-7P-wzt" eventType="touchUpInside" id="pXO-gL-TVb"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="eXa-a0-Zpf">
+                                <rect key="frame" x="259" y="547" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="9lp-5b-lfe"/>
+                                    <constraint firstAttribute="width" constant="100" id="aRf-Pv-Oz7"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="bNa-wo-tRu"/>
+                                    <constraint firstAttribute="height" constant="100" id="ib1-yA-i8d"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -134,6 +154,8 @@ This can be changed later.</string>
                             <constraint firstItem="V3Z-Wj-IiQ" firstAttribute="centerX" secondItem="PUz-LV-VcN" secondAttribute="centerX" id="G4n-GR-Cmv"/>
                             <constraint firstItem="tuY-iE-ocX" firstAttribute="top" secondItem="jaV-cW-hAg" secondAttribute="bottom" constant="8" id="IxS-ZV-gYn"/>
                             <constraint firstItem="SuG-Pw-1Bs" firstAttribute="leading" secondItem="PUz-LV-VcN" secondAttribute="leadingMargin" id="RXM-6y-aGj"/>
+                            <constraint firstItem="eXa-a0-Zpf" firstAttribute="trailing" secondItem="PUz-LV-VcN" secondAttribute="trailingMargin" id="Soq-cv-xYE"/>
+                            <constraint firstItem="wex-0u-4B3" firstAttribute="top" secondItem="eXa-a0-Zpf" secondAttribute="bottom" constant="20" id="aHy-fj-daa"/>
                             <constraint firstItem="jaV-cW-hAg" firstAttribute="centerX" secondItem="PUz-LV-VcN" secondAttribute="centerX" id="buX-oj-hXn"/>
                             <constraint firstItem="V3Z-Wj-IiQ" firstAttribute="top" secondItem="cp4-hg-7NK" secondAttribute="bottom" constant="8" id="clX-iZ-Jpb"/>
                             <constraint firstItem="jaV-cW-hAg" firstAttribute="centerX" secondItem="PUz-LV-VcN" secondAttribute="centerX" id="hiJ-WY-g2p"/>
@@ -206,9 +228,19 @@ You can change this later too.</string>
                                     <constraint firstAttribute="width" constant="274" id="wUD-FR-Ks6"/>
                                 </constraints>
                             </pickerView>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="so0-g9-Cna">
+                                <rect key="frame" x="259" y="547" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="4Lu-no-dqt"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="IHY-Zf-s5m"/>
+                                    <constraint firstAttribute="width" constant="100" id="hMY-FL-E8W"/>
+                                    <constraint firstAttribute="height" constant="100" id="nG0-F3-PVj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="so0-g9-Cna" firstAttribute="trailing" secondItem="Ggm-tP-2AT" secondAttribute="trailingMargin" id="8I5-pd-kBW"/>
                             <constraint firstItem="DFR-bV-pRe" firstAttribute="top" secondItem="aod-mB-hs2" secondAttribute="bottom" constant="8" id="9Nd-xR-bP1"/>
                             <constraint firstItem="aod-mB-hs2" firstAttribute="top" secondItem="RjP-Ag-hMO" secondAttribute="bottom" constant="8" id="EMy-uM-PEQ"/>
                             <constraint firstItem="DFR-bV-pRe" firstAttribute="centerX" secondItem="RjP-Ag-hMO" secondAttribute="centerX" id="W98-Qf-bKV"/>
@@ -216,6 +248,7 @@ You can change this later too.</string>
                             <constraint firstItem="RjP-Ag-hMO" firstAttribute="top" secondItem="uSb-Pi-AkL" secondAttribute="bottom" constant="8" id="X7N-6b-Oqm"/>
                             <constraint firstItem="5ME-Ug-04V" firstAttribute="centerX" secondItem="Ggm-tP-2AT" secondAttribute="centerX" id="aH8-mI-2Ec"/>
                             <constraint firstItem="uSb-Pi-AkL" firstAttribute="centerX" secondItem="Ggm-tP-2AT" secondAttribute="centerX" id="abQ-J2-SxY"/>
+                            <constraint firstItem="6fA-9U-Wix" firstAttribute="top" secondItem="so0-g9-Cna" secondAttribute="bottom" constant="20" id="b6F-rQ-lLA"/>
                             <constraint firstItem="uSb-Pi-AkL" firstAttribute="top" secondItem="5ME-Ug-04V" secondAttribute="bottom" constant="8" id="kM7-ds-vqX"/>
                             <constraint firstItem="aod-mB-hs2" firstAttribute="centerX" secondItem="RjP-Ag-hMO" secondAttribute="centerX" id="mkP-04-Uxz"/>
                             <constraint firstItem="5ME-Ug-04V" firstAttribute="top" secondItem="HbE-o8-SPI" secondAttribute="bottom" constant="8" id="ml0-cV-UwS"/>
@@ -249,9 +282,9 @@ You can change this later too.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IcQ-xy-WRH">
-                                <rect key="frame" x="16" y="137" width="343" height="469"/>
+                                <rect key="frame" x="16" y="135.5" width="343" height="470.5"/>
                                 <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">About
+                                <mutableString key="text">About
 Zen is a financial planner with record keeping abilities. Simply login using your user credentials (if you forget, there's a Forgot Password link at the bottom of the login screen), or register by entering your email and password then pressing Register. 
 Budget
 The budget screen consists of a small number on top (your total assets/account balances/cash assuming you've inputted all your expenses and incomes), a middle large number (your budget for the cycle), a small number (your savings from the cycle), and five buttons. In order from left to right, these buttons are: add expense, add income, savings (where you can set aside a specified percentage of each income for savings), goals (where you can set your spending goals for each category) and help.
@@ -263,14 +296,14 @@ Settings
 In the settings tab, you may create cycles with a set duration (Duration button) rather than have a continuous budget, and reset your cycles (Reset button) (or all your transactions if the cycle is continuous!). The Currency button changes your currency from dollars to another symbol. The About button will take you to this screen, and the Logout button will log you out of the system and require an email/password combination to get back in. The Reset App button will reset all your data, deleting all your transactions and returning the app to a factory default state.
 
 Copyrights
-(c) 2017 Nathan Scott, Icons by https://icons8.com/free-ios-7-icons-in-vector (icons8), Logo made with GIMP</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+(c) 2017 Nathan Scott, Icons by https://icons8.com/free-ios-7-icons-in-vector (icons8), Logo made with GIMP, Graphs by Charts by Daniel Gindi</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eD-17-qcT">
-                                <rect key="frame" x="16" y="72" width="343" height="57"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="48"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="16" y="72" width="343" height="55.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="48"/>
+                                <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGi-jh-G49">
@@ -279,7 +312,7 @@ Copyrights
                                     <constraint firstAttribute="width" constant="200" id="MU3-Zr-ozW"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="ZZe-cX-L7o"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Back to Login"/>
                                 <connections>
@@ -327,7 +360,7 @@ Copyrights
                                     <constraint firstAttribute="height" constant="33" id="f6H-ol-ZOO"/>
                                     <constraint firstAttribute="width" constant="100" id="vpf-5F-jpa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
@@ -340,7 +373,7 @@ Copyrights
                                     <constraint firstAttribute="height" constant="33" id="CYK-kW-yiL"/>
                                     <constraint firstAttribute="width" constant="100" id="aZO-ec-wGw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
@@ -350,34 +383,46 @@ Copyrights
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MkJ-gc-34j">
                                 <rect key="frame" x="86" y="40" width="203" height="140"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-Be-Jh1">
-                                        <rect key="frame" x="61.5" y="0.0" width="80.5" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="De1-HS-wdo"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="48"/>
-                                        <color key="textColor" red="0.0" green="0.706676494088889" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simplify your finances!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4P-PQ-EWR">
-                                        <rect key="frame" x="17.5" y="50" width="168" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qhv-4d-k7Y">
+                                        <rect key="frame" x="27.5" y="0.0" width="148" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="RTN-7s-5UK">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="Stw-hd-KzW"/>
+                                                    <constraint firstAttribute="height" constant="50" id="kyS-HM-hdL"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Zen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-Be-Jh1">
+                                                <rect key="frame" x="50" y="0.0" width="98" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="De1-HS-wdo"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="48"/>
+                                                <color key="textColor" red="0.0" green="0.706676494088889" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep your finances in balance!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4P-PQ-EWR">
+                                        <rect key="frame" x="12" y="50" width="179.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="iP2-VM-Awj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Italic" family="Avenir Next Condensed" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njo-6s-NGB">
                                         <rect key="frame" x="0.0" y="80" width="203" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mB1-1p-hDG">
                                         <rect key="frame" x="0.0" y="110" width="203" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
@@ -390,8 +435,8 @@ Copyrights
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="693-HS-ezO">
-                                <rect key="frame" x="86" y="614" width="45" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="86" y="614" width="47" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="About"/>
                                 <connections>
@@ -400,8 +445,8 @@ Copyrights
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DO3-d3-u6O">
-                                <rect key="frame" x="165" y="614" width="124" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="152" y="614" width="137" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Forgot Password?"/>
                                 <connections>
@@ -418,20 +463,12 @@ Copyrights
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="hkr-IC-hqv">
-                                <rect key="frame" x="67.5" y="277" width="240" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="m1a-bY-xWk"/>
-                                    <constraint firstAttribute="width" constant="240" id="qty-pR-Wg3"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HMh-3T-Lfa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="24k-wM-rBa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="693-HS-ezO" secondAttribute="bottom" constant="20" id="5MU-xt-vJd"/>
                             <constraint firstItem="HMh-3T-Lfa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="6ML-gM-dWB"/>
-                            <constraint firstItem="hkr-IC-hqv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="79I-ih-svD"/>
                             <constraint firstItem="HMh-3T-Lfa" firstAttribute="top" secondItem="uAp-VW-GjL" secondAttribute="bottom" constant="8" id="7Wd-MU-0TU"/>
                             <constraint firstItem="693-HS-ezO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="70" id="8cO-Y2-53e"/>
                             <constraint firstItem="HMh-3T-Lfa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="965-g9-DvI"/>
@@ -443,7 +480,6 @@ Copyrights
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DO3-d3-u6O" secondAttribute="bottom" constant="20" id="R9H-ik-1vV"/>
                             <constraint firstItem="MkJ-gc-34j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="ao1-AC-lZa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="E0g-j5-HVf" secondAttribute="trailing" constant="70" id="caO-WK-aVe"/>
-                            <constraint firstItem="hkr-IC-hqv" firstAttribute="top" secondItem="HMh-3T-Lfa" secondAttribute="bottom" constant="8" id="gJE-d0-VMB"/>
                             <constraint firstItem="uAp-VW-GjL" firstAttribute="top" secondItem="MkJ-gc-34j" secondAttribute="bottom" constant="8" id="q2c-I8-THj"/>
                             <constraint firstItem="HMh-3T-Lfa" firstAttribute="top" secondItem="uAp-VW-GjL" secondAttribute="bottom" constant="8" id="xNR-Z5-3P9"/>
                             <constraint firstItem="uAp-VW-GjL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="70" id="yX7-rP-yFb"/>
@@ -460,7 +496,7 @@ Copyrights
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2506" y="-306"/>
+            <point key="canvasLocation" x="2504.8000000000002" y="-306.29685157421289"/>
         </scene>
         <!--Budget-->
         <scene sceneID="aJ9-2c-cVZ">
@@ -475,8 +511,8 @@ Copyrights
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEJ-IQ-Xev">
-                                <rect key="frame" x="16" y="72" width="343" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-ExtraBlack" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="16" y="72" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -539,15 +575,13 @@ Copyrights
                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         <state key="normal" image="Help"/>
                                         <connections>
-                                            <segue destination="391-YO-6ev" kind="popoverPresentation" popoverAnchorView="uNl-OX-D2T" id="bXC-MB-aNj">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="391-YO-6ev" kind="show" id="bXC-MB-aNj"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80e-oX-WTJ">
-                                <rect key="frame" x="16" y="384.5" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="385" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -559,8 +593,8 @@ Copyrights
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-4K-Kce">
-                                <rect key="frame" x="16" y="291.5" width="343" height="85.5"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="72"/>
+                                <rect key="frame" x="16" y="291.5" width="343" height="86"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                 <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -608,15 +642,6 @@ Copyrights
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="A8h-XU-v7j">
-                                <rect key="frame" x="259" y="510" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="1kt-0L-eSL"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Ga0-en-Wfz"/>
-                                    <constraint firstAttribute="height" constant="100" id="gs2-Pj-IjS"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="iX6-MN-yYI"/>
-                                </constraints>
-                            </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ow1-4B-6dw">
                                 <rect key="frame" x="14" y="318.5" width="347" height="31"/>
                                 <connections>
@@ -624,13 +649,13 @@ Copyrights
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYP-SM-8TI">
-                                <rect key="frame" x="153" y="253.5" width="69.5" height="57"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="48"/>
+                                <rect key="frame" x="155.5" y="253.5" width="65" height="57"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set a portion of each income aside for savings!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hea-J8-XEF">
                                 <rect key="frame" x="16" y="356" width="343" height="17"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -638,7 +663,6 @@ Copyrights
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Hea-J8-XEF" firstAttribute="top" secondItem="Ow1-4B-6dw" secondAttribute="bottom" constant="8" id="1gU-It-c1k"/>
-                            <constraint firstItem="A8h-XU-v7j" firstAttribute="trailing" secondItem="DCc-Jj-hvJ" secondAttribute="trailingMargin" id="1iB-Dp-0bS"/>
                             <constraint firstItem="Ow1-4B-6dw" firstAttribute="trailing" secondItem="DCc-Jj-hvJ" secondAttribute="trailingMargin" id="9AL-5q-5TJ"/>
                             <constraint firstItem="Hea-J8-XEF" firstAttribute="trailing" secondItem="DCc-Jj-hvJ" secondAttribute="trailingMargin" id="DKM-mG-0jK"/>
                             <constraint firstItem="Ow1-4B-6dw" firstAttribute="top" secondItem="vYP-SM-8TI" secondAttribute="bottom" constant="8" id="FRk-HW-Nyc"/>
@@ -646,7 +670,6 @@ Copyrights
                             <constraint firstItem="Ow1-4B-6dw" firstAttribute="centerX" secondItem="DCc-Jj-hvJ" secondAttribute="centerX" id="bQU-W2-pcH"/>
                             <constraint firstItem="Ow1-4B-6dw" firstAttribute="leading" secondItem="DCc-Jj-hvJ" secondAttribute="leadingMargin" id="j9N-aZ-Qay"/>
                             <constraint firstItem="Ow1-4B-6dw" firstAttribute="centerY" secondItem="DCc-Jj-hvJ" secondAttribute="centerY" id="jbt-1M-1Nb"/>
-                            <constraint firstItem="3tb-T1-qNo" firstAttribute="top" secondItem="A8h-XU-v7j" secondAttribute="bottom" constant="8" id="mfS-wk-IgV"/>
                             <constraint firstItem="Hea-J8-XEF" firstAttribute="leading" secondItem="DCc-Jj-hvJ" secondAttribute="leadingMargin" id="sF0-CW-2OF"/>
                         </constraints>
                     </view>
@@ -727,23 +750,23 @@ Copyrights
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Reset" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wn2-aJ-fXl">
-                                <rect key="frame" x="16" y="40" width="343" height="57"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="48"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="16" y="40" width="343" height="46.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="40"/>
+                                <color key="textColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0rP-Xc-bjL">
-                                <rect key="frame" x="86" y="104.5" width="203" height="30"/>
+                                <rect key="frame" x="86" y="94" width="203" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fX8-VI-7ja">
-                                <rect key="frame" x="87.5" y="142.5" width="200" height="33"/>
+                                <rect key="frame" x="87.5" y="132" width="200" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="mTM-KE-rTl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Send Email"/>
                                 <connections>
@@ -752,7 +775,7 @@ Copyrights
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="He9-6a-oMs">
-                                <rect key="frame" x="16" y="183.5" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="173" width="343" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="sE0-ZW-ty0"/>
                                 </constraints>
@@ -765,7 +788,7 @@ Copyrights
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Und-gG-er0"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="0.0" green="0.7066764941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Back to Login"/>
                                 <connections>
@@ -1351,8 +1374,8 @@ Copyrights
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecL-yL-6h2">
-                                <rect key="frame" x="231" y="129" width="71" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="227.5" y="129" width="74.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1407,18 +1430,9 @@ Copyrights
                             <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vha-Im-0da">
                                 <rect key="frame" x="27.5" y="108" width="320" height="216"/>
                             </pickerView>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="QUv-oq-e5F">
-                                <rect key="frame" x="259" y="498" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="158-V4-AIw"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="70Z-cY-4th"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="O2H-Uf-adC"/>
-                                    <constraint firstAttribute="width" constant="100" id="fDL-o0-nF9"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recur every" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrg-Th-OdG">
-                                <rect key="frame" x="144" y="124" width="87" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="142" y="124" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1430,8 +1444,8 @@ Copyrights
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="starting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-dZ-0GJ">
-                                <rect key="frame" x="161" y="241" width="53" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="158" y="241" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1447,7 +1461,6 @@ Copyrights
                         </subviews>
                         <color key="backgroundColor" red="0.92144894600000005" green="0.9441775348" blue="0.92184495929999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="QUv-oq-e5F" firstAttribute="trailing" secondItem="2C7-GG-9Li" secondAttribute="trailingMargin" id="05M-aK-lud"/>
                             <constraint firstItem="Vha-Im-0da" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="0vL-oW-PF1"/>
                             <constraint firstItem="vJs-QH-en0" firstAttribute="leading" secondItem="V4J-y6-Fyt" secondAttribute="trailing" constant="20" id="6lV-0L-zF5"/>
                             <constraint firstItem="tc2-J2-HUh" firstAttribute="top" secondItem="6cB-Zw-awF" secondAttribute="bottom" constant="60" id="8Nu-Ab-Nds"/>
@@ -1464,7 +1477,6 @@ Copyrights
                             <constraint firstItem="8YV-YM-G6b" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="dti-55-gmn"/>
                             <constraint firstItem="VWZ-eV-Rs0" firstAttribute="centerX" secondItem="2C7-GG-9Li" secondAttribute="centerX" id="eet-ZB-6yt"/>
                             <constraint firstAttribute="trailing" secondItem="vJs-QH-en0" secondAttribute="trailing" constant="20" id="efr-jJ-V5W"/>
-                            <constraint firstItem="kRT-Mq-7u1" firstAttribute="top" secondItem="QUv-oq-e5F" secondAttribute="bottom" constant="20" id="f9X-32-Kvj"/>
                             <constraint firstItem="8YV-YM-G6b" firstAttribute="top" secondItem="ecL-yL-6h2" secondAttribute="bottom" constant="3" id="fi3-t4-y4A"/>
                             <constraint firstItem="tc2-J2-HUh" firstAttribute="trailing" secondItem="2C7-GG-9Li" secondAttribute="trailingMargin" id="gdg-Ob-GWt"/>
                             <constraint firstItem="V4J-y6-Fyt" firstAttribute="top" secondItem="ecL-yL-6h2" secondAttribute="bottom" constant="25" id="gqr-g6-3ze"/>
@@ -1615,8 +1627,8 @@ Copyrights
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPP-gj-fcB">
-                                <rect key="frame" x="231" y="129" width="71" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="227.5" y="129" width="74.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1671,18 +1683,9 @@ Copyrights
                             <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tto-vv-5IW">
                                 <rect key="frame" x="27.5" y="108" width="320" height="216"/>
                             </pickerView>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-WG-6As">
-                                <rect key="frame" x="259" y="498" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="g21-C3-j6U"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="iQn-Fi-uM0"/>
-                                    <constraint firstAttribute="width" constant="100" id="jEL-ve-oYM"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="jan-0v-bHc"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recur every" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMm-YP-VOv">
-                                <rect key="frame" x="144" y="124" width="87" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="142" y="124" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1694,8 +1697,8 @@ Copyrights
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="starting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLg-rV-zBa">
-                                <rect key="frame" x="161" y="241" width="53" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="158" y="241" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1727,9 +1730,7 @@ Copyrights
                             <constraint firstItem="Fm4-as-TdK" firstAttribute="leading" secondItem="RPP-gj-fcB" secondAttribute="trailing" constant="8" id="Uxa-j0-tf3"/>
                             <constraint firstItem="XIp-oP-rKQ" firstAttribute="top" secondItem="RPP-gj-fcB" secondAttribute="bottom" constant="3" id="V5N-0a-bZ0"/>
                             <constraint firstItem="XIp-oP-rKQ" firstAttribute="trailing" secondItem="6Zq-30-91a" secondAttribute="trailingMargin" constant="-92" id="c4J-Jr-aTH"/>
-                            <constraint firstItem="1xV-WG-6As" firstAttribute="trailing" secondItem="6Zq-30-91a" secondAttribute="trailingMargin" id="cfS-YV-iyj"/>
                             <constraint firstItem="XMm-YP-VOv" firstAttribute="centerX" secondItem="6Zq-30-91a" secondAttribute="centerX" id="f09-4x-01y"/>
-                            <constraint firstItem="200-NA-4Hk" firstAttribute="top" secondItem="1xV-WG-6As" secondAttribute="bottom" constant="20" id="iTI-Np-My7"/>
                             <constraint firstItem="bLg-rV-zBa" firstAttribute="centerX" secondItem="6Zq-30-91a" secondAttribute="centerX" id="iqO-qL-mAk"/>
                             <constraint firstItem="Yco-zV-i0e" firstAttribute="leading" secondItem="XZO-J6-qoO" secondAttribute="trailing" constant="20" id="lli-DM-Rop"/>
                             <constraint firstItem="Fm4-as-TdK" firstAttribute="top" secondItem="Acv-MS-C8z" secondAttribute="bottom" constant="60" id="mLg-BK-Bmm"/>
@@ -1773,8 +1774,8 @@ Copyrights
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recurring" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db8-3y-yLE">
-                                <rect key="frame" x="231" y="129" width="71" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="227.5" y="129" width="74.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1829,18 +1830,9 @@ Copyrights
                             <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8E-MC-2dP">
                                 <rect key="frame" x="27.5" y="108" width="320" height="216"/>
                             </pickerView>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="6j7-9M-die">
-                                <rect key="frame" x="259" y="498" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Aym-m5-mBc"/>
-                                    <constraint firstAttribute="height" constant="100" id="aGs-MM-Jlu"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="grl-9P-vzr"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="uYk-mt-Gw7"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recur every" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAa-iO-Inj">
-                                <rect key="frame" x="144" y="124" width="87" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="142" y="124" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1852,8 +1844,8 @@ Copyrights
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="starting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbc-f9-LZk">
-                                <rect key="frame" x="161" y="241" width="53" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <rect key="frame" x="158" y="241" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1871,8 +1863,6 @@ Copyrights
                         <constraints>
                             <constraint firstItem="Yxv-H5-crH" firstAttribute="top" secondItem="0dp-p3-hTg" secondAttribute="bottom" constant="20" id="4Ju-Rm-ESC"/>
                             <constraint firstAttribute="trailing" secondItem="Yxv-H5-crH" secondAttribute="trailing" constant="20" id="7hQ-9G-clP"/>
-                            <constraint firstItem="6j7-9M-die" firstAttribute="trailing" secondItem="3cI-0t-Ymh" secondAttribute="trailingMargin" id="7pp-Cf-eGj"/>
-                            <constraint firstItem="nyZ-3F-g3q" firstAttribute="top" secondItem="6j7-9M-die" secondAttribute="bottom" constant="20" id="9MS-KT-m9n"/>
                             <constraint firstItem="tvc-lS-MmL" firstAttribute="top" secondItem="Db8-3y-yLE" secondAttribute="bottom" constant="25" id="9cN-di-OQU"/>
                             <constraint firstItem="jYU-1c-C5Q" firstAttribute="centerX" secondItem="3cI-0t-Ymh" secondAttribute="centerX" id="CDt-Lm-sbM"/>
                             <constraint firstItem="FAa-iO-Inj" firstAttribute="top" secondItem="jYU-1c-C5Q" secondAttribute="bottom" constant="24" id="HhG-VM-RN1"/>
@@ -2054,11 +2044,11 @@ Copyrights
         <image name="Settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="drS-Hn-9Jh"/>
-        <segue reference="YDR-x8-oyq"/>
-        <segue reference="h7g-iM-Abg"/>
-        <segue reference="5TO-aZ-Zh8"/>
-        <segue reference="BZA-Ng-Qb7"/>
+        <segue reference="bXC-MB-aNj"/>
+        <segue reference="d3h-pE-7Fb"/>
+        <segue reference="XLU-IH-y3T"/>
         <segue reference="cFk-q5-TWI"/>
+        <segue reference="cqw-X7-B3Q"/>
+        <segue reference="Ie9-xC-jsI"/>
     </inferredMetricsTieBreakers>
 </document>

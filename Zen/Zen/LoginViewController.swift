@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
                             "goals": []])
                         let dict: Dictionary<String, Float> = [
                             "Automotive & Transportation": 100.00,
-                            "Bills & Utilities": 2000.00,
+                            "Bills & Utilities": 1500.00,
                             "Business Services": 100.00,
                             "Charges & Fees": 5.00,
                             "Donations & Gifts": 10.00,
