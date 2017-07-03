@@ -31,6 +31,8 @@
 		43BC89551EECC13B003FC1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */; };
 		43BD2C7B1F08868E005E0810 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD2C7A1F08868E005E0810 /* GoalViewController.swift */; };
 		43BD2C7D1F092C05005E0810 /* GoalOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */; };
+		43D2466B1F099C2E00E7FD5C /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2466A1F099C2E00E7FD5C /* AnalysisViewController.swift */; };
+		43D2466D1F099F8100E7FD5C /* AnalysisViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */; };
 		43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */; };
 		43ED38D31F0957E100A4A0D4 /* GoalOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */; };
 		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
@@ -87,6 +89,8 @@
 		43BC89521EECC13B003FC1CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		43BD2C7A1F08868E005E0810 /* GoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewViewController.swift; sourceTree = "<group>"; };
+		43D2466A1F099C2E00E7FD5C /* AnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
+		43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisViewCell.swift; sourceTree = "<group>"; };
 		43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTransactionViewController.swift; sourceTree = "<group>"; };
 		43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewCell.swift; sourceTree = "<group>"; };
 		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 		43BC89231EECB3EB003FC1CC /* Zen */ = {
 			isa = PBXGroup;
 			children = (
+				43D246691F099C1300E7FD5C /* Analysis */,
 				43BC89241EECB3EB003FC1CC /* AppDelegate.swift */,
 				434797931F01D2490017DCDE /* Budget */,
 				4307260C1EF09FBF005C78EE /* Login */,
@@ -262,6 +267,15 @@
 				43BC89461EECB3EB003FC1CC /* Info.plist */,
 			);
 			path = ZenUITests;
+			sourceTree = "<group>";
+		};
+		43D246691F099C1300E7FD5C /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				43D2466A1F099C2E00E7FD5C /* AnalysisViewController.swift */,
+				43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */,
+			);
+			name = Analysis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -555,6 +569,7 @@
 				434797921EF617CE0017DCDE /* RecordsSearchTableViewController.swift in Sources */,
 				43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */,
 				4347979E1F0836450017DCDE /* Setup2ViewController.swift in Sources */,
+				43D2466D1F099F8100E7FD5C /* AnalysisViewCell.swift in Sources */,
 				43FBC7431EECDE1100283477 /* BudgetViewController.swift in Sources */,
 				4308E3121EF03206003DC1D6 /* RecordsViewController.swift in Sources */,
 				43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */,
@@ -568,6 +583,7 @@
 				4307260E1EF0A1A5005C78EE /* AddExpenseViewController.swift in Sources */,
 				430726101EF0A1B5005C78EE /* AddIncomeViewController.swift in Sources */,
 				43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */,
+				43D2466B1F099C2E00E7FD5C /* AnalysisViewController.swift in Sources */,
 				434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */,
 				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 				43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */,

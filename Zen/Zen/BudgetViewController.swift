@@ -23,6 +23,12 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
     @IBOutlet weak var accountLabel: UILabel!
     
     override func viewDidLoad() {
+        navigationController?.navigationBar.barTintColor = UIColor(red: 60/255, green: 180/255, blue: 60/255, alpha: 0)
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        tabBarController?.tabBar.barTintColor = UIColor(red: 60/255, green: 180/255, blue: 60/255, alpha: 0)
+        tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
+        tabBarController?.tabBar.tintColor = UIColor.white
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         emailDisplay.text = "\(getEmail())"

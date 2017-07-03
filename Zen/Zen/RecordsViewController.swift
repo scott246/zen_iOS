@@ -321,6 +321,12 @@ class RecordsViewController: UITableViewController, ExpenseDataEnteredDelegate, 
     //viewDidLoad() function: set database variables, set bar button items, start observing database
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = UIColor(red: 60/255, green: 180/255, blue: 60/255, alpha: 0)
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        tabBarController?.tabBar.barTintColor = UIColor(red: 60/255, green: 180/255, blue: 60/255, alpha: 0)
+        tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
+        tabBarController?.tabBar.tintColor = UIColor.white
         self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Add Income", style: .plain, target: self, action: #selector(didTapAddIncome))], animated: true)
         self.navigationItem.setRightBarButtonItems(
             [UIBarButtonItem(title: "Add Expense", style: .plain, target: self, action: #selector(didTapAddExpense)),

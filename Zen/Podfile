@@ -8,6 +8,7 @@ target 'Zen' do
   # Pods for Zen
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Charts'
 
   target 'ZenTests' do
     inherit! :search_paths
