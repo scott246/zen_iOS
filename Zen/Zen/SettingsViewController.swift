@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 
 var currency = "$"
+var PINEnabled = false
 
 class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate {
     
@@ -32,6 +33,12 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
         user = Auth.auth().currentUser
         ref = Database.database().reference()
         currencyLabel.text = currency
+        if (PINEnabled) {
+            while tableView.numberOfRows(inSection: 1) < 1 {
+                continue
+            }
+            tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.accessoryType = .checkmark
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +56,25 @@ class SettingsViewController: UITableViewController, CurrencyDataEnteredDelegate
                 print("couldn't sign out")
             }
         }
-        if indexPath.row == 0 && indexPath.section == 1 { //reset data button
+        if indexPath.row == 0 && indexPath.section == 1 { //PIN button
+            if let cell = tableView.cellForRow(at: indexPath) {
+                
+                if cell.accessoryType == .checkmark {
+                    PINEnabled = false
+                    Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/PINEnabled").setValue(false)
+                    Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/PIN").setValue("")
+                    cell.accessoryType = .none
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }
+                else {
+                    cell.accessoryType = .checkmark
+                    PINEnabled = true
+                    Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/PINEnabled").setValue(true)
+                    performSegue(withIdentifier: "setPIN", sender: nil)
+                }
+            }
+        }
+        if indexPath.row == 0 && indexPath.section == 2 { //reset data button
             //show an alert
             let alert = UIAlertController(title: "Warning!", message: "Are you sure you want to reset all your data?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))

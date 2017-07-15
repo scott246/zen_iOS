@@ -35,11 +35,13 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        var totalNumber: Float = 0.00
         user = Auth.auth().currentUser
         ref = Database.database().reference()
         ref.child("users/\(self.user.uid)/account").observeSingleEvent(of: .value, with: {(snapshot) in
             let value = snapshot.value as? Float ?? 0.00
             totalAssets = value
+            totalNumber += totalAssets
         })
         ref.child("users/\(self.user.uid)/savings").observeSingleEvent(of: .value, with: {(snapshot) in
             let value = snapshot.value as? Float ?? 0.00
@@ -47,7 +49,7 @@ class BudgetViewController: UIViewController, IncomeDataEnteredDelegate, Expense
         })
         var budgetNumber = 0.00
         var savingsNumber = 0.00
-        var totalNumber = totalAssets
+        //var totalNumber = totalAssets
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2

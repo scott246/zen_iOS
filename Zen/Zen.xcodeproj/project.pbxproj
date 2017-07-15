@@ -18,6 +18,7 @@
 		4347979B1F08337E0017DCDE /* Setup1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979A1F08337E0017DCDE /* Setup1ViewController.swift */; };
 		4347979E1F0836450017DCDE /* Setup2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979D1F0836450017DCDE /* Setup2ViewController.swift */; };
 		434797A01F083A3E0017DCDE /* Setup3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347979F1F083A3E0017DCDE /* Setup3ViewController.swift */; };
+		4358FDA91F1A848700345DFC /* PINEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4358FDA81F1A848700345DFC /* PINEntryViewController.swift */; };
 		438D9B6C1EEF86F200831E32 /* CurrencySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */; };
 		43BC89251EECB3EB003FC1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89241EECB3EB003FC1CC /* AppDelegate.swift */; };
 		43BC89271EECB3EB003FC1CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC89261EECB3EB003FC1CC /* LoginViewController.swift */; };
@@ -33,6 +34,7 @@
 		43BD2C7D1F092C05005E0810 /* GoalOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */; };
 		43D2466B1F099C2E00E7FD5C /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2466A1F099C2E00E7FD5C /* AnalysisViewController.swift */; };
 		43D2466D1F099F8100E7FD5C /* AnalysisViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */; };
+		43D246721F0BCAF800E7FD5C /* PINSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D246711F0BCAF800E7FD5C /* PINSettingsViewController.swift */; };
 		43E808441EF1A49C0002C22D /* EditTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */; };
 		43ED38D31F0957E100A4A0D4 /* GoalOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */; };
 		43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */; };
@@ -72,6 +74,7 @@
 		4347979A1F08337E0017DCDE /* Setup1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup1ViewController.swift; sourceTree = "<group>"; };
 		4347979D1F0836450017DCDE /* Setup2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup2ViewController.swift; sourceTree = "<group>"; };
 		4347979F1F083A3E0017DCDE /* Setup3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup3ViewController.swift; sourceTree = "<group>"; };
+		4358FDA81F1A848700345DFC /* PINEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINEntryViewController.swift; sourceTree = "<group>"; };
 		438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectorViewController.swift; sourceTree = "<group>"; };
 		43BC89211EECB3EB003FC1CC /* Zen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BC89241EECB3EB003FC1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 		43BD2C7C1F092C05005E0810 /* GoalOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewViewController.swift; sourceTree = "<group>"; };
 		43D2466A1F099C2E00E7FD5C /* AnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisViewCell.swift; sourceTree = "<group>"; };
+		43D246711F0BCAF800E7FD5C /* PINSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINSettingsViewController.swift; sourceTree = "<group>"; };
+		43D246731F11222F00E7FD5C /* Zen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Zen-Bridging-Header.h"; path = "Zen/Zen-Bridging-Header.h"; sourceTree = "<group>"; };
 		43E808431EF1A49C0002C22D /* EditTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTransactionViewController.swift; sourceTree = "<group>"; };
 		43ED38D21F0957E100A4A0D4 /* GoalOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalOverviewCell.swift; sourceTree = "<group>"; };
 		43F2EA7A1EED909300088973 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 			children = (
 				438D9B6B1EEF86F200831E32 /* CurrencySelectorViewController.swift */,
 				43F30E141EEDF29E009C5D5C /* SettingsViewController.swift */,
+				43D246711F0BCAF800E7FD5C /* PINSettingsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 		43BC89181EECB3EB003FC1CC = {
 			isa = PBXGroup;
 			children = (
+				43D246731F11222F00E7FD5C /* Zen-Bridging-Header.h */,
 				43BC89231EECB3EB003FC1CC /* Zen */,
 				43BC89381EECB3EB003FC1CC /* ZenTests */,
 				43BC89431EECB3EB003FC1CC /* ZenUITests */,
@@ -240,6 +247,7 @@
 				434797931F01D2490017DCDE /* Budget */,
 				4307260C1EF09FBF005C78EE /* Login */,
 				431842F91EF0E17C00D51052 /* Records */,
+				43D246701F0BCAD900E7FD5C /* Security */,
 				438D9B6F1EEF87C500831E32 /* Settings */,
 				4347979C1F08338D0017DCDE /* Setup */,
 				43BC892D1EECB3EB003FC1CC /* LaunchScreen.storyboard */,
@@ -276,6 +284,14 @@
 				43D2466C1F099F8100E7FD5C /* AnalysisViewCell.swift */,
 			);
 			name = Analysis;
+			sourceTree = "<group>";
+		};
+		43D246701F0BCAD900E7FD5C /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				4358FDA81F1A848700345DFC /* PINEntryViewController.swift */,
+			);
+			name = Security;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -587,6 +603,8 @@
 				434797901EF6149A0017DCDE /* RecordsSearchViewController.swift in Sources */,
 				43F2EA7B1EED909300088973 /* PasswordResetViewController.swift in Sources */,
 				43F30E151EEDF29E009C5D5C /* SettingsViewController.swift in Sources */,
+				43D246721F0BCAF800E7FD5C /* PINSettingsViewController.swift in Sources */,
+				4358FDA91F1A848700345DFC /* PINEntryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +764,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott246.Zen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Zen/Zen-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -760,6 +779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.scott246.Zen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Zen/Zen-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

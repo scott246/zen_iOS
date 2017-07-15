@@ -60,11 +60,17 @@ class LoginViewController: UIViewController {
     @IBAction func aboutButton(_ sender: AnyObject) {
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.emailTextField.text = ""
+        self.passwordTextField.text = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Login"
         self.restorationIdentifier = "Login"
+        
         //FirebaseApp.configure()
         Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
@@ -80,8 +86,14 @@ class LoginViewController: UIViewController {
                 let userID = Auth.auth().currentUser?.uid
                 Database.database().reference().child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
+                    PINEnabled = value?["PINEnabled"] as? Bool ?? false
                     ll = value?["lastlogin"] as? String ?? "0"
                     ac = value?["account"] as? Float ?? 0.00
+                    if value?["PIN"] != nil {
+                       if value?["PIN"] as! String != "" {
+                            self.performSegue(withIdentifier: "enterPIN", sender: nil)
+                        }
+                    }
                     if ll != "0" && ac != 0.00 {
                         self.performSegue(withIdentifier: "login", sender: nil)
                     }
@@ -91,7 +103,8 @@ class LoginViewController: UIViewController {
                             "lastlogin": "0",
                             "savings": 20,
                             "account": 0.00,
-                            "goals": []])
+                            "goals": [],
+                            "PINEnabled": false])
                         let dict: Dictionary<String, Float> = [
                             "Automotive & Transportation": 100.00,
                             "Bills & Utilities": 1500.00,
